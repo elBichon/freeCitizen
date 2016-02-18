@@ -16,11 +16,37 @@
         <header>
         </header>
         <h1>Mon Compte</h1>
-            <?php  include("includes/connect.php"); ?>
-        <section id="InscriptionSuiteConfirmation">
-            
+        <?php include("includes/connect.php");?>
+        <?php include("includes/menu.php");?>
+        <section id="voirCompte">
+<?php
+    $id = $_SESSION['id'];
+    echo $id;
+   $reponse = $bdd->query('SELECT *  FROM freeCitizenMembres WHERE id ="'.$id.'"');
+    while ($donnees = $reponse->fetch())
+    {
+        echo '<p>Mon Login: '. $donnees['login'] .'</p></br><p>Mon Email: '. $donnees['email'] .'</p></br><p>Ma ville: '. $donnees['ville'] .';
+    }
+    $reponse->closeCursor();
+    /*function chargerClasse($Compte)
+    {
+        require $classeCompte . '.php';
+    }
+    
+    spl_autoload_register('chargerClasse');
+    $compte = new Compte();
+    $request = $db->query('SELECT * FROM freeCitizenMembres WHERE id ="'.$id.'"');
+    
+    while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
+        $compte = new Compte($donnees);
+        echo 'Login: '$compte->getLogin(),'</br>'
+        'Id: '$monId->getId(),'</br>';
+    }*/
+    
+    ?>
         </section>
-
+        <section id="modifierCompte">
+        </section>
 
 
     <footer>

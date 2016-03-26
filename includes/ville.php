@@ -1,11 +1,11 @@
-<?php
-<form method="post" action="trait.php">
-<label for="ville">Quelle ville recherchez-vous</label><br />
+<form method="post" action="membres.php">
+
+<label for="ville">Ou allons-nous ?</label></br>
 <select name="ville" id="ville">
 
 <?php
     
-    $reponse = $bdd->query("SELECT * FROM freeCitizenVilles ORDER BY ville");
+    $reponse = $bdd->query("SELECT DISTINCT ville FROM freeCitizenVilles ORDER BY ville");
     
     while ($donnees = $reponse->fetch())
     {
@@ -16,8 +16,7 @@
     
     ?>
 </select>
-<div class="bouton"><input type="submit" class="text" value="envoyer"/></div>
-
+<div class="bouton"><input type="submit" class="text" value="membres"/></div>
 </form>
 
-?>
+

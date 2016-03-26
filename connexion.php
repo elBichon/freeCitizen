@@ -25,7 +25,7 @@
     <section id="">
     <?php
         $login = htmlspecialchars($_POST['login']);
-        $pass_hache = md5(htmlspecialchars($_POST['password']));
+        $pass_hache = sha1(htmlspecialchars($_POST['password']));
     
         if (empty($login) || empty($pass_hache)){
             $connexion_erreur = "Vous devez renseigner un login et un mot de pass";
@@ -47,12 +47,19 @@
         else{
             session_start();
             $_SESSION['id'] = $resultat['id'];
+            $id = $_SESSION['id'];
             $_SESSION['login'] = $login;
             echo 'Bonjour ' . $_SESSION['login'];
             require 'includes/menu.php';
+            require 'includes/ville.php';
+            
+            $req2=$bdd->prepare("UPDATE freeCitizenMembres SET connect = 1 WHERE id = :id" );
+            $req2->bindParam(":id",$id);
+            $req2->execute();
+            
         }
     }
-    ?>
+?>
     </section>
 
     <footer>

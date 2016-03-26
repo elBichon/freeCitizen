@@ -3,3 +3,4 @@ $message = "Bienvenue à FREE CITIZEN, tu es à un seul clic de ton réveil, pou
         $titre = "confirmation d'inscription à FREE CITIZEN";
         mail($email, $titre, $message);
 ?>
+

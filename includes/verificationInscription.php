@@ -2,9 +2,8 @@
         $i = 0;
         $login = htmlspecialchars($_POST['login']);
         $email = htmlspecialchars($_POST['email']);
-        $ville = htmlspecialchars($_POST['ville']);
-        $pass_hache = md5(htmlspecialchars($_POST['password']));
-        $confirm = md5(htmlspecialchars($_POST['passwordVerification']));
+        $pass_hache = sha1(htmlspecialchars($_POST['password']));
+        $confirm = sha1(htmlspecialchars($_POST['passwordVerification']));
         $cookies = htmlspecialchars($_POST['cookies']);
         $cgu = htmlspecialchars($_POST['cgu']);
         $confirmation = 0;
@@ -54,12 +53,6 @@
             echo $email_erreur2;
             echo "</br>";
         }
-        if (!preg_match("#[a-z]#", $ville) || empty($ville)){
-            $ville_erreur = "Votre ville n'a pas un format valide";
-            $i++;
-            echo $ville_erreur;
-            echo "</br>";
-        }
         if ($cgu!="ok"){
             $cgu_erreur = "Vous devez accepter les conditions générales d'utilisation";
             $i++;
@@ -79,13 +72,9 @@
                         'cgu' => $cgu,
                         'confirmation' => $confirmation
                         ));
-            $req2 = $bdd->prepare('INSERT INTO freeCitizenVilles(login, ville) VALUES(:login, :ville)');
-            $req2->execute(array(
-                            'login' => $login,
-                            'ville' => $ville
-                            ));
-            echo "</br>";
-            echo "votre inscription a bien été reçue, un mail de confirmation vous sera bientôt envoyé. S'il n'apparaît pas, pensez à vérifier vos spams.";
+            echo "</br>Renseignez votre ville s'il vous plaît</br>";
+            echo "<form method='post' action='inscriptionSuite.php'><div id='villeInscription'><label for='ville'>Votre Ville</label><input type='text' class='form-control' id='ville' placeholder='ville' name='ville' required></div><input type='hidden' name='login' value='$login'><div class='error-message'></div></br><button type='submit' id='envoyerVille'>Inscription</button></form>";
+            echo "</br></br>";
             echo "</br>";
         }
     echo $_COOKIE['login'];

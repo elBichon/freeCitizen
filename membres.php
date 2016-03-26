@@ -1,7 +1,4 @@
 <?php
-    
-    
-        
         session_start();
         ?>
 
@@ -34,14 +31,15 @@ if ($_SESSION['id'] != 0) {
         $reponse = $bdd->query('SELECT DISTINCT m.login, m.email, v.ville FROM freeCitizenVilles v, freeCitizenMembres m WHERE v.idMembre = m.login AND ville = "'.$ville.'"');
         while ($donnees = $reponse->fetch())
         {
-            echo '<p><strong><a href="'. $donnees['compte.php'] .'">'. $donnees['login'] .'</a></strong>' . $donnees['email'] .'</br></p>';
+        echo '<p><strong><a href="membresSuite.php" value='. $donnees['login'] .'>'. $donnees['login'] .'</a>:   </strong>' . $donnees['email'] .'</br></p>';
+
     }
         echo '</section>';
         echo '<section id="membresConnectes"><h2>Tous les membres connectés dans cette ville</h2>';
         $reponse1 = $bdd->query('SELECT DISTINCT m.login, m.email, m.connect, v.ville FROM freeCitizenVilles v, freeCitizenMembres m WHERE v.idMembre = m.login AND ville = "'.$ville.'" AND connect = 1');
         while ($donnees = $reponse1->fetch())
         {
-        echo '<p><strong><a href="'. $donnees['compte.php'] .'">'. $donnees['login'] .'</a></strong>' . $donnees['email'] .'</br></p>';
+        echo '<p><strong><a href="membresSuite.php">'. $donnees['login'] .'</a>:   </strong>' . $donnees['email'] .'</br></p>';
     }
 
         echo '</section>';
@@ -52,8 +50,8 @@ else {echo "vous n'etes pas connecté";}
     echo '<footer>';
                 require 'includes/footer.php';
     echo '</footer>';
-
 ?>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
     </body>

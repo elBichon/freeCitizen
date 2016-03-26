@@ -10,29 +10,34 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/verificationLogin.js"></script>
+        <script src="js/verificationInscription.js"></script>
     </head>
+
     <body>
     <header>
     </header>
 
-    <h1>Free Citizen</h1>
-    <h2>Réveille toi en un clic</h2>
-        <?php // include("includes/connect.php"); ?>
+    <h1>FREE CITIZEN</h1>
 
+    <?php include("includes/connect.php"); ?>
     <section id="connexion">
         <h3>Connexion</h3></br>
-        <div class="col-sm-12 col-xs-12 col-lg-12">
+        <div class="">
             <form action="connexion.php" method="post">
-            <div class="col-lg-4 col-sm-4 col-xs-4">
-            <label for="emailInputConnexion">Adresse Mail</label>
-            <input type="email" class="form-control" id="emailConnexion" placeholder="Email">
+            <div id="loginConnexion">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="champLogin" placeholder="login" name="login" required>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4">
-                <label for="passwordConnexion">Mot de passe</label>
-                <input type="password" class="form-control" id="passwordConnexion" placeholder="Password">
+            <div class="error-message"></div></br>
+            <div id="passwordConnexion">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" placeholder="password" id="champPassword" name="password" required>
             </div>
-            <div class="col-lg-4 col-sm-4 col-xs-4">
-                <button type="submit" class="btn btn-default">Se connecter</button>
+            <div class="error-message"></div></br>
+            <div class="button">
+                <button type="submit" id="envoyerConnexion" class="btn btn-default">Se connecter</button>
             </div>
             </form>
         </div>
@@ -40,50 +45,43 @@
 
     <section id="inscription">
         <h3>Inscription</h3></br>
-        <div class="col-sm-12 col-xs-12 col-lg-12">
-            <form action="inscription.php" method="post">
-            <div class="col-sm-12 col-xs-12">
+       <div class="">
+            <form method="post" action="inscription.php">
+            <div class="" id="loginInscription">
                 <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" placeholder="login">
+                <input type="text" class="form-control" id="login" placeholder="login" name="login" required>
             </div>
-            <div class="col-sm-12 col-xs-12">
-                <label for="ville">Ville</label>
-                <input type="text" class="form-control" id="ville" placeholder="ville">
-            </div></br>
-            <div class="col-sm-12 col-xs-12">
-                <label for="emailInscription">Adresse Email</label>
-                <input type="email" class="form-control" id="emailInscription" placeholder="Email">
+            <div class="error-message"></div></br>
+            <div class="" id="emailInscription">
+                <label for="email">Adresse Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
             </div>
-            <div class="col-sm-6 col-xs-6">
-                <label for="passwordInscription">Mot de passe</label>
-                <input type="password" class="form-control" id="passwordInscription1" placeholder="Password">
-            </div></br>
-            <div class="col-sm-6 col-xs-6">
-                <label for="passwordInscription2">Vérification du mot de passe</label>
-                <input type="password" class="form-control" id="passwordInscription2" placeholder="Password">
+            <div class="error-message"></div></br>
+            <div class="" id="passwordInscription">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
             </div>
-            <div class="col-sm-12 col-xs-12"></br></br>
-            <div class="cookies">
-            <label>
-                <input type="checkbox"> Se souvenir de moi
-            </label>
+            <div class="error-message"></div></br></br>
+        <div class="" id="passwordInscriptionCheck">
+                <label for="password2">Vérification du mot de passe</label>
+                <input type="password" class="form-control" id="password2" placeholder="Password" name="passwordVerification" required>
         </div>
-        <div class="cgu">
+        <div class="error-message"></div></br>
+        <div id="cgu">
             <label>
-                <input type="checkbox"> J'ai bien pris connaissance et accpete les conditions générales d'utilisation
+                <input type="checkbox" name="cgu" value="ok" required> J'ai bien pris connaissance et accpete les <a href='cgu.php'>conditions générales d'utilisation</a>
             </label>
         </div></br>
-            <div class="col-sm-12 col-xs-12">
-                <button type="submit" class="btn btn-default">Inscription</button>
+            <div class="">
+                <button type="submit" id="envoyerInscription" class="btn btn-default">Inscription</button>
             </div>
             </form>
         </div>
     </section>
 
-
     <footer>
+            <?php  include("includes/footer.php"); ?>
     </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
     </body>
 </html>

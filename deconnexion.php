@@ -14,16 +14,14 @@
     <body>
         <header>
         </header>
-        <h1>Confirmation de ton inscription</h1>
+        <h1>A bientôt sur FreeCitizen</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="deconnexion">
         <?php
             session_start();
             $_SESSION = array();
             session_destroy();
-            setcookie('login', '');
-            setcookie('pass_hache', '');
-        ?>
+                    ?>
         </section>
 
 

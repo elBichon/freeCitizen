@@ -46,7 +46,10 @@ if ($_SESSION['id'] != 0) {
         echo '<section id="">';
         echo '</section>';
 }
-else {echo "vous n'etes pas connecté";}
+else {
+    echo "vous n'etes pas connecté";
+}
+    
     echo '<footer>';
                 require 'includes/footer.php';
     echo '</footer>';

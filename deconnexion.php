@@ -1,3 +1,6 @@
+<?php session_start();
+        ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -17,11 +20,14 @@
         <h1>A bientôt sur FreeCitizen</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="deconnexion">
-        <?php
-            session_start();
-            $_SESSION = array();
-            session_destroy();
-                    ?>
+<?php
+    $id = $_POST['id'];
+    echo $id;
+    
+    $req2=$bdd->prepare('UPDATE freeCitizenMembres SET connect = 0 WHERE id = "'.$login.'"');
+    $req2->bindParam(":login",$login);
+    $req2->execute();
+    ?>
         </section>
 
 

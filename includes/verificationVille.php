@@ -15,3 +15,6 @@
                              ));
     echo "un mail de confirmation vous sera bientôt envoyé, pensez à vérifier vos spams";
 ?>
+
+
+

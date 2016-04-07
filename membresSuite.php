@@ -20,12 +20,12 @@
         <h1>Mon Compte</h1>
         <?php include("includes/connect.php");?>
         <?php include("includes/ville.php");?>
+        <?php include("includes/pluginRecherche.php"); ?>
         <?php include("includes/menu.php");?>
         <section id="voirCompte">
 <?php
 
     $login = $_POST['login'];
-    echo $login;
    $reponse = $bdd->query('SELECT * FROM freeCitizenMembres WHERE login ="'.$login.'"');
     while ($donnees = $reponse->fetch())
     {

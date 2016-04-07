@@ -1,3 +1,6 @@
+<?php session_start();
+    ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -19,69 +22,74 @@
     <header>
     </header>
 
-    <h1>FREE CITIZEN</h1>
+<?php
+    if (isset($_SESSION['login'])) {
+    echo '<h1>FREE CITIZEN</h1>';
+        echo 'Il y a eu un problème de connexion, vous ne devriez pas voir ceci';
 
-    <?php include("includes/connect.php"); ?>
-    <section id="connexion">
-        <h3>Connexion</h3></br>
-        <div class="">
-            <form action="connexion.php" method="post">
-            <div id="loginConnexion">
-                <label for="login">Login</label>
-                <input type="text" class="form-control" id="champLogin" placeholder="login" name="login" required>
-            </div>
-            <div class="error-message"></div></br>
-            <div id="passwordConnexion">
-                <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" placeholder="password" id="champPassword" name="password" required>
-            </div>
-            <div class="error-message"></div></br>
-            <div class="button">
-                <button type="submit" id="envoyerConnexion" class="btn btn-default">Se connecter</button>
-            </div>
-            </form>
-        </div>
-    </section>
+       }
+   else {
+       require 'includes/connect.php';
+    echo '<section id="connexion">';
+        echo '<h3>Connexion</h3></br>';
+        echo '<div class="">';
+            echo '<form action="connexion.php" method="post">';
+            echo '<div id="loginConnexion">';
+                echo '<label for="login">Login</label>';
+                echo '<input type="text" class="form-control" id="champLogin" placeholder="login" name="login" required>';
+            echo '</div>';
+            echo '<div class="error-message"></div></br>';
+            echo '<div id="passwordConnexion">';
+                echo '<label for="password">Mot de passe</label>';
+                echo '<input type="password" class="form-control" placeholder="password" id="champPassword" name="password" required>';
+            echo '</div>';
+            echo '<div class="error-message"></div></br>';
+            echo '<div class="button">';
+                echo '<button type="submit" id="envoyerConnexion" class="btn btn-default">Se connecter</button>';
+            echo '</div>';
+            echo '</form>';
+        echo '</div>';
+    echo '</section>';
 
-    <section id="inscription">
-        <h3>Inscription</h3></br>
-       <div class="">
-            <form method="post" action="inscription.php">
-            <div class="" id="loginInscription">
-                <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" placeholder="login" name="login" required>
-            </div>
-            <div class="error-message"></div></br>
-            <div class="" id="emailInscription">
-                <label for="email">Adresse Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-            </div>
-            <div class="error-message"></div></br>
-            <div class="" id="passwordInscription">
-                <label for="password">Mot de passe</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-            </div>
-            <div class="error-message"></div></br></br>
-        <div class="" id="passwordInscriptionCheck">
-                <label for="password2">Vérification du mot de passe</label>
-                <input type="password" class="form-control" id="password2" placeholder="Password" name="passwordVerification" required>
-        </div>
-        <div class="error-message"></div></br>
-        <div id="cgu">
-            <label>
-                <input type="checkbox" name="cgu" value="ok" required> J'ai bien pris connaissance et accpete les <a href='cgu.php'>conditions générales d'utilisation</a>
-            </label>
-        </div></br>
-            <div class="">
-                <button type="submit" id="envoyerInscription" class="btn btn-default">Inscription</button>
-            </div>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-            <?php  include("includes/footer.php"); ?>
-    </footer>
-
+    echo '<section id="inscription">';
+        echo '<h3>Inscription</h3></br>';
+       echo '<div class="">';
+            echo '<form method="post" action="inscription.php">';
+            echo '<div class="" id="loginInscription">';
+                echo '<label for="login">Login</label>';
+                echo '<input type="text" class="form-control" id="login" placeholder="login" name="login" required>';
+            echo '</div>';
+            echo '<div class="error-message"></div></br>';
+            echo '<div class="" id="emailInscription">';
+                echo '<label for="email">Adresse Email</label>';
+                echo '<input type="email" class="form-control" id="email" placeholder="Email" name="email" required>';
+            echo '</div>';
+            echo '<div class="error-message"></div></br>';
+            echo '<div class="" id="passwordInscription">';
+                echo '<label for="password">Mot de passe</label>';
+                echo '<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>';
+            echo '</div>';
+            echo '<div class="error-message"></div></br></br>';
+        echo '<div class="" id="passwordInscriptionCheck">';
+                echo '<label for="password2">Vérification du mot de passe</label>';
+                echo '<input type="password" class="form-control" id="password2" placeholder="Password" name="passwordVerification" required>';
+        echo '</div>';
+        echo '<div class="error-message"></div></br>';
+        echo '<div id="cgu">';
+            echo '<label>';
+                echo '<input type="checkbox" name="cgu" value="ok" required> J ai bien pris connaissance et accpete les <a href="cgu.php">conditions générales d utilisation</a>';
+            echo '</label>';
+        echo '</div></br>';
+            echo '<div class="">';
+                echo '<button type="submit" id="envoyerInscription" class="btn btn-default">Inscription</button>';
+            echo '</div>';
+            echo '</form>';
+        echo '</div>';
+    echo '</section>';
+    }
+    echo '<footer>';
+            require 'includes/footer.php';
+    echo '</footer>';
+?>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<form method="post" action="membres.php">
+<form method="post" action="<?php echo $nomPage; ?>">
 
 <label for="ville">Ou allons-nous ?</label></br>
 <select name="ville" id="ville">

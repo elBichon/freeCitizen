@@ -21,6 +21,7 @@
     <h1>Free Citizen</h1>
     <h2>Réveille toi en un clic</h2>
         <?php include("includes/connect.php"); ?>
+        <?php include("includes/pluginRecherche.php"); ?>
 
     <section id="">
     <?php

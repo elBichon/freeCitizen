@@ -27,11 +27,12 @@ if ($_SESSION['id'] != 0) {
             $ville = $_POST['ville'];
             require 'includes/ville.php';
             require 'includes/menu.php';
+            require 'includes/pluginRecherche.php'; 
       echo '<section id="voirMembres"><h2>Tous les membres dans cette ville</h2>';
         $reponse = $bdd->query('SELECT DISTINCT m.login, m.email, v.ville FROM freeCitizenVilles v, freeCitizenMembres m WHERE v.idMembre = m.login AND ville = "'.$ville.'"');
         while ($donnees = $reponse->fetch())
         {
-        echo '<p><strong><a href="membresSuite.php" value='. $donnees['login'] .'>'. $donnees['login'] .'</a>:   </strong>' . $donnees['email'] .'</br></p>';
+        echo '<p><strong><a href="membresSuite.php" id="link" value='. $donnees['login'] .'>'. $donnees['login'] .'</a>:   </strong>' . $donnees['email'] .'</br></p>';
 
     }
         echo '</section>';
@@ -49,11 +50,12 @@ if ($_SESSION['id'] != 0) {
 else {
     echo "vous n'etes pas connecté";
 }
-    
+   
     echo '<footer>';
                 require 'includes/footer.php';
     echo '</footer>';
 ?>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

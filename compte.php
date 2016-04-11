@@ -25,6 +25,17 @@
         include 'includes/menu.php';
         echo '<section id="voirCompte">';
 
+        <header>
+        </header>
+        <h1>Mon Compte</h1>
+        <?php include("includes/connect.php");?>
+        <?php $nomPage = "membres.php"; ?>
+        <?php include("includes/ville.php");?>
+        <?php include("includes/pluginRecherche.php"); ?>
+        <?php include("includes/menu.php");?>
+        <section id="voirCompte">
+<?php
+
     $id = $_SESSION['id'];
    $reponse = $bdd->query('SELECT * FROM freeCitizenMembres WHERE id ="'.$id.'"');
     while ($donnees = $reponse->fetch())

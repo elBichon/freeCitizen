@@ -17,6 +17,7 @@
         <header>
         </header>
         <h1>A bientôt sur FreeCitizen</h1>
+        <p>Se <a href="index.php">reconnecter</a></p>
             <?php  include("includes/connect.php"); ?>
         <section id="deconnexion">
 

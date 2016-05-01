@@ -26,6 +26,8 @@
     if (isset($_SESSION['login'])) {
     echo '<h1>FREE CITIZEN</h1>';
         echo 'Il y a eu un problème de connexion, vous ne devriez pas voir ceci';
+        echo '</br>';
+        echo 'rendez vous <a href="deconnexion.php">ICI</a>';
 
        }
    else {

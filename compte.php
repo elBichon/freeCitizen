@@ -16,19 +16,19 @@
     </head>
     <body>
 <?php
-    if ($_SESSION['id'] != 0) {
+  //  if ($_SESSION['id'] != 0) {
         echo '<header>';
         echo '</header>';
         echo '<h1>Mon Compte</h1>';
         require 'includes/connect.php';
         include 'includes/ville.php';
         include 'includes/menu.php';
+        require 'includes/menuServices.php';
         echo '<section id="voirCompte">';
-
-        <header>
-        </header>
+    ?>
         <h1>Mon Compte</h1>
-        <?php include("includes/connect.php");?>
+// }
+        <?php include("includes/connect.php"); ?>
         <?php $nomPage = "membres.php"; ?>
         <?php include("includes/ville.php");?>
         <?php include("includes/pluginRecherche.php"); ?>

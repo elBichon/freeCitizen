@@ -1,5 +1,4 @@
-<?php session_start();
-        ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,14 +19,23 @@
         <h1>A bientôt sur FreeCitizen</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="deconnexion">
+
 <?php
-    $id = $_POST['id'];
-    echo $id;
+    session_start();
     
-    $req2=$bdd->prepare('UPDATE freeCitizenMembres SET connect = 0 WHERE id = "'.$login.'"');
-    $req2->bindParam(":login",$login);
-    $req2->execute();
-    ?>
+    // Suppression des variables de session et de la session
+    $_SESSION = array();
+    session_destroy();
+    
+    // Suppression des cookies de connexion automatique
+    setcookie('login', '');
+    setcookie('pass_hache', '');
+
+
+
+
+?>
+
         </section>
 
 

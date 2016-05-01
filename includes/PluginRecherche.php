@@ -5,7 +5,7 @@
             <input type="text" class="form-control" id="champLogin" placeholder="login" name="login" required>
         </div>
         <div class="button">
-            <button type="submit" id="envoyerRecherche" class="btn btn-default">rechercher</button>
+            <button type="submit" id="envoyerRecherche" class="btn btn-default">aller</button>
         </div>
     </form>
 </div>

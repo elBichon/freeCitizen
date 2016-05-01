@@ -1,12 +1,10 @@
 <?php
-    class Info
+    class Commentaire
     {
         private $_id,
-        $_titre,
+        $_idArticle,
         $_date,//date de publication de l article
-        $_ville,//ville ou l info a lieu
-        $_theme,//theme de l article, ecologie, politique, finance...
-        $_idAuteur,//jointure avec la table membre et appel a l objet compte
+        $_idCommentateur,//jointure avec la table membre et appel a l objet compte
         $_texte;
         
         
@@ -37,25 +35,17 @@
         {
             return $this->_id;
         }
-        public function titre()
+        public function idArticle()
         {
-            return $this->_titre;
+            return $this->_idArticle;
         }
         public function date()
         {
             return $this->_date;
         }
-        public function ville()
+        public function idCommentateur()
         {
-            return $this->_ville;
-        }
-        public function theme()
-        {
-            return $this->_theme;
-        }
-        public function idAuteur()
-        {
-            return $this->_idAuteur;
+            return $this->_idCommentateur;
         }
         public function texte()
         {
@@ -72,29 +62,24 @@
                 $this->_id = $id;
             }
         }
-        public function setTitre($titre)
+        public function setIdArticle($idArticle)
         {
-            if (is_string($titre))
+            $idArticle = (int) $idArticle;
+            if ($idArticle > 0)
             {
-                $this->_titre = $titre;
+                $this->_idArticle = $idArticle;
             }
-        }
+        
         public function setDate($date)
         {
             $this->_date = $date;
         }
-        public function setVille($ville)
+        public function setCommentateur($idCommentateur)
         {
-            if (is_string($ville))
+            $idCommentateur = (int) $idCommentateur;
+            if ($idCommentateur > 0)
             {
-                $this->_ville = $ville;
-            }
-        }
-        public function setTheme($theme)
-        {
-            if (is_string($theme))
-            {
-                $this->_theme = $theme;
+                $this->_idCommentateur = $idCommentateur;
             }
         }
         public function setTexte($texte)
@@ -102,14 +87,6 @@
             if (is_string($texte))
             {
                 $this->_texte = $texte;
-            }
-        }
-        public function setIdAuteur($idAuteur)
-        {
-            $idAuteur = (int) $idAuteur;
-            if ($idAuteur > 0)
-            {
-                $this->_idAuteur = $idAuteur;
             }
         }
         

@@ -27,6 +27,7 @@ if ($_SESSION['id'] != 0) {
             $ville = $_POST['ville'];
             require 'includes/ville.php';
             require 'includes/menu.php';
+            require 'includes/menuService.php';
             require 'includes/pluginRecherche.php'; 
       echo '<section id="voirMembres"><h2>Tous les membres dans cette ville</h2>';
         $reponse = $bdd->query('SELECT DISTINCT m.login, m.email, v.ville FROM freeCitizenVilles v, freeCitizenMembres m WHERE v.idMembre = m.login AND ville = "'.$ville.'"');

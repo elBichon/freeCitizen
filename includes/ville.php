@@ -16,7 +16,7 @@
     
     ?>
 </select>
-<div class="bouton"><input type="submit" class="text" value="membres"/></div>
+<div class="bouton"><input type="submit" class="text" value="aller"/></div>
 </form>
 
 

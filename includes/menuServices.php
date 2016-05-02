@@ -1,9 +1,3 @@
-<!--/*menu pour aller aux pages infos
-job
-produit
-projet
-events
- debats*/-->
 <ul class="nav nav-tabs">
     <li role="infos" class="active"><a href="infos.php">INFOS</a></li>
     <li role="job" class="active"><a href="job.php">JOBS</a></li>

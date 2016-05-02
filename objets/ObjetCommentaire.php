@@ -3,8 +3,8 @@
     {
         private $_id,
         $_idArticle,
-        $_date,//date de publication de l article
-        $_idCommentateur,//jointure avec la table membre et appel a l objet compte
+        $_datePost,
+        $_idCommentateur,
         $_texte;
         
         
@@ -69,7 +69,7 @@
             {
                 $this->_idArticle = $idArticle;
             }
-        
+        }
         public function setDate($date)
         {
             $this->_date = $date;
@@ -96,4 +96,4 @@
             echo "test retour Projet";
         }
     }
-    ?>
+?>

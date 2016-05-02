@@ -112,11 +112,5 @@
                 $this->_idAuteur = $idAuteur;
             }
         }
-        
-        //test objet
-        public function retour()
-        {
-            echo "test retour Projet";
-        }
     }
     ?>

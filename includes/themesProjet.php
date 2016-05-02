@@ -4,7 +4,7 @@
 
     <select name="ville" id="ville">
     <?php
-        $reponse = $bdd->query("SELECT DISTINCT ville FROM freeCitizenInfos ORDER BY ville");
+        $reponse = $bdd->query("SELECT DISTINCT ville FROM freeCitizenProjet ORDER BY ville");
         while ($donnees = $reponse->fetch())
         {
             ?>
@@ -15,7 +15,7 @@
     </select>
     <select name="theme" id="theme">
     <?php
-        $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenInfos ORDER BY theme");
+        $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenProjet ORDER BY theme");
         while ($donnees = $reponse->fetch())
         {
             ?>

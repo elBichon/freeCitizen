@@ -16,7 +16,7 @@
     </head>
     <body>
 <?php
-  //  if ($_SESSION['id'] != 0) {
+    if ($_SESSION['id'] != 0) {
         echo '<header>';
         echo '</header>';
         echo '<h1>Mon Compte</h1>';
@@ -24,32 +24,35 @@
         include 'includes/ville.php';
         include 'includes/menu.php';
         require 'includes/menuServices.php';
-        echo '<section id="voirCompte">';
-    ?>
-        <h1>Mon Compte</h1>
-// }
-        <?php include("includes/connect.php"); ?>
-        <?php $nomPage = "membres.php"; ?>
-        <?php include("includes/ville.php");?>
-        <?php include("includes/pluginRecherche.php"); ?>
-        <?php include("includes/menu.php");?>
-        <section id="voirCompte">
-<?php
+        require 'objets/objetCompte.php';
 
-    $id = $_SESSION['id'];
-   $reponse = $bdd->query('SELECT * FROM freeCitizenMembres WHERE id ="'.$id.'"');
-    while ($donnees = $reponse->fetch())
-    {
-        echo '<p>Mon Login: '. $donnees['login'] .'</p></br><p>Mon Email: '. $donnees['email'] .'</p></br>';
-    }
-    $reponse->closeCursor();
-    
+        echo '<section id="voirCompte">';
+            $id = $_SESSION['id'];
+            $request = $bdd->query('SELECT * FROM freeCitizenMembres WHERE id ="'.$id.'"');
+            while ($donnees = $request->fetch(PDO::FETCH_ASSOC))
+            {
+                $compte = new Compte($donnees);
+                echo "id: ";
+                echo $compte->id();
+                echo "</br>";
+                echo "login: ";
+                echo $compte->login();
+                echo "</br>";
+                echo "adresse mail: ";
+                echo $compte->email();//problème d'affichage des mails
+                echo "</br>";
+            }
+            $request->closeCursor();
         echo '</section>';
 
         echo '<section id="modifierCompte">';
         echo '</section>';
 
         echo '<section id="detruireCompte">';
+            echo "</br>";
+            echo "Attention, si vous faites cela, votre compte et toutes les informations qu'il contient seront perdues.";
+            echo "</br>";
+            echo "Cet acte est irréversible";
         echo '</section>';
     }
     else {

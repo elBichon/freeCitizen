@@ -32,10 +32,10 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuInfos.php';
 
             echo '<form action="ajoutInfos.php" method="post">';
-                echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" /><br />';
-                echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" /><br />';
-               // echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" /><br />';
-                echo '<label for="texte">nouvelle</label> : <textarea name="texte" rows="10" cols="50">votre texte ici</textarea><br />';
+                echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
+                echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" required/><br />';
+                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" required/><br />';
+                echo '<label for="texte">nouvelle</label> : <textarea name="texte" rows="10" cols="50" required>votre texte ici</textarea><br />';
                echo '<input type="hidden" name="idAuteur" value="echo $idAuteur;" >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';

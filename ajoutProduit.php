@@ -34,8 +34,8 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuInfos.php';
 
             echo '<form action="ajoutProduit.php" method="post">';
-                echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" /><br />';
-                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre<" /><br />';
+                echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
+                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre"required /><br />';
                 echo '<label for="equipe">type</label> :<textarea name="type" rows="10" cols="50">genre de produit</textarea><br />';
                 echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre projet ici</textarea><br />';
                 echo '<select name="statut" id="statut">';

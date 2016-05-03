@@ -4,7 +4,7 @@
         private $_id,
         $_titre,
         $_date,//date de publication de l article
-        //$_dateDebut;
+        $_dateDebut;
         $_ville,//ville ou l info a lieu
         $_theme,//theme de l article, ecologie, politique, finance...
         $_idAuteur,//jointure avec la table membre et appel a l objet compte

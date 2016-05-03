@@ -13,6 +13,7 @@
             }
             ?>
     </select>
+<label for="theme">Que cherchons-nous ?</label></br>
     <select name="theme" id="theme">
     <?php
         $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenProduit ORDER BY theme");
@@ -24,7 +25,11 @@
             }
             ?>
     </select>
-
+<label for="statut">Statut</label></br>
+    <select name="statut" id="statut">
+        <option value="proposition">proposition</option>
+        <option value="recherche">recherche</option>
+    </select>
 
 <div class="bouton"><input type="submit" class="text" value="aller"/></div>
 </form>

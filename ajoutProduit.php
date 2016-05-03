@@ -35,15 +35,19 @@ if ($_SESSION['id'] != 0) {
 
             echo '<form action="ajoutProduit.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" /><br />';
-                echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" /><br />';
-                echo '<label for="equipe">equipe</label> :<textarea name="equipe" rows="10" cols="50">votre equipe ici</textarea><br />';
+                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre<" /><br />';
+                echo '<label for="equipe">type</label> :<textarea name="type" rows="10" cols="50">genre de produit</textarea><br />';
                 echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre projet ici</textarea><br />';
+                echo '<select name="statut" id="statut">';
+                    echo '<option value="proposition">proposition</option>';
+                    echo '<option value="recherche">recherche</option>';
+                echo '</select>
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
-    $req = $bdd->prepare('INSERT INTO freeCitizenProjet (date, ville, theme, idAuteur, equipe, descriptif) VALUES(NOW(),?,?,?,?,? )');
-    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['equipe'],$_POST['descriptif']  ));
+    $req = $bdd->prepare('INSERT INTO freeCitizenProduit (date, ville, type, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,? )');
+    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));
 }
 else {
     echo "vous n'etes pas connecté";

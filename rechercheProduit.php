@@ -22,39 +22,39 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
-        $nomPage = "rechercheProduit.php";
+        $nomPage = "rechercheProjet.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
         $statut = $_POST['statut'];
         $idCommentateur=$_SESSION['id'];
-        $mieuxNotes="produit.php";
-        $recherche="rechercheProduit.php";
-        $ajouter="ajoutProduit.php";
+        $mieuxNotes="projet.php";
+        $recherche="rechercheProjet.php";
+        $ajouter="ajoutProjet.php";
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
         require 'includes/themesProduit.php';
         require 'objets/ObjetProduit.php';
         
-        echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND type = "'.$type.'" AND statut = "'.$statut.'" ORDER BY date DESC');
+        echo '<section id="voirProjet"><h2>Toutes les propostions et recherches de produits dans cette ville</h2>';
+        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
                 $produit = new Produit($donnees);
-                echo $projet->id();
+                echo $job->id();
                 echo "</br>";
-                echo $projet->titre();
+                echo $job->titre();
                 echo "</br>";
-                echo $projet->date();
+                echo $job->date();
                 echo "</br>";
-                echo $projet->ville();
+            echo $job->dateDisponnibilite();
                 echo "</br>";
-                echo $projet->theme();
+                echo $job->ville();
                 echo "</br>";
-                echo $projet->idAuteur();
+                echo $job->type();
                 echo "</br>";
-                echo $projet->equipe();
+                echo $job->statut();
                 echo "</br>";
-                echo $projet->descriptif();
+                echo $job->descriptif();
             }
             $request->closeCursor();
             echo'</section>';

@@ -13,6 +13,7 @@
             }
             ?>
     </select>
+<label for="theme">Que cherchons-nous ?</label></br>
     <select name="theme" id="theme">
     <?php
         $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenInfos ORDER BY theme");

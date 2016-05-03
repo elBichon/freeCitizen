@@ -1,7 +1,6 @@
 drop table if exists freeCitizenCommentairesInfos;
 create table freeCitizenCommentairesInfos (
 id integer not null primary key auto_increment,
-titre varchar(50) not null,
 idInfo integer not null,
 datePost datetime not null,
 idCommentateur integer  not null,

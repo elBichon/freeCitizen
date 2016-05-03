@@ -34,27 +34,29 @@
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
         require 'includes/themesProduit.php';
+        require 'includes/bbcodeTexte.php';
         require 'objets/ObjetProduit.php';
         
         echo '<section id="voirProjet"><h2>Toutes les propostions et recherches de produits dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
                 $produit = new Produit($donnees);
-                echo $job->id();
+                $texte = $produit->descriptif();
+                echo $produit->id();
                 echo "</br>";
-                echo $job->titre();
+                echo $produit->titre();
                 echo "</br>";
-                echo $job->date();
+                echo $produit->date();
                 echo "</br>";
-            echo $job->dateDisponnibilite();
+                echo $produit->dateDisponnibilite();
                 echo "</br>";
-                echo $job->ville();
+                echo $produit->ville();
                 echo "</br>";
-                echo $job->type();
+                echo $produit->type();
                 echo "</br>";
-                echo $job->statut();
+                echo $produit->statut();
                 echo "</br>";
-                echo $job->descriptif();
+                echo $texte;
             }
             $request->closeCursor();
             echo'</section>';

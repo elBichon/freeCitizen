@@ -34,6 +34,7 @@ if ($_SESSION['id'] != 0) {
             echo '<form action="ajoutEvent.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" /><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" /><br />';
+                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" /><br />';
                 echo '<label for="equipe">equipe</label> :<textarea name="equipe" rows="10" cols="50">votre equipe ici</textarea><br />';
                 echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre projet ici</textarea><br />';
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
@@ -41,8 +42,42 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
+    
+    $i = 0;
+    $ville = htmlspecialchars($_POST['ville']);
+    $titre = htmlspecialchars($_POST['type']);
+    $theme = htmlspecialchars($_POST['titre']);
+    $theme = htmlspecialchars($_POST['statut']);
+    $texte = htmlspecialchars($_POST['descriptif']);
+    
+    $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenEvent WHERE titre =:titre');
+    $query->bindValue(':titre',$titre, PDO::PARAM_STR);
+    $query->execute();
+    $titre_free=($query->fetchColumn()==0)?1:0;
+    $query->CloseCursor();
+    
+    if(!$titre_free){
+        $titre_erreur1 = "Votre titre est déjà utilisé";
+        $i++;
+        echo $titre_erreur1;
+        echo "</br>";
+    }
+    if (strlen($titre) < 3 || strlen($titre) > 300){
+        $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
+        $i++;
+        echo $titre_erreur2;
+        echo "</br>";
+    }
+    if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
+        $vide_erreur = "Des champs sont vides";
+        $i++;
+        echo $vide_erreur;
+        echo "</br>";
+    }
+    else{
     $req = $bdd->prepare('INSERT INTO freeCitizenEvent (date, titre, dateDebut, theme, idAuteur, participant, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
-    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['participant'],$_POST['descriptif']  ));
+    $req->execute(array($_POST['ville'],$_POST['titre'] ,$_POST['theme'],$_POST['idAuteur'],$_POST['participant'],$_POST['descriptif']  ));
+    }
 }
 else {
     echo "vous n'etes pas connecté";

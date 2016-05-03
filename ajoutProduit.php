@@ -46,8 +46,41 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
+    $i = 0;
+    $ville = htmlspecialchars($_POST['ville']);
+    $titre = htmlspecialchars($_POST['type']);
+    $theme = htmlspecialchars($_POST['titre']);
+    $theme = htmlspecialchars($_POST['statut']);
+    $texte = htmlspecialchars($_POST['descriptif']);
+    
+    $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenProduit WHERE titre =:titre');
+    $query->bindValue(':titre',$titre, PDO::PARAM_STR);
+    $query->execute();
+    $titre_free=($query->fetchColumn()==0)?1:0;
+    $query->CloseCursor();
+    
+    if(!$titre_free){
+        $titre_erreur1 = "Votre titre est déjà utilisé";
+        $i++;
+        echo $titre_erreur1;
+        echo "</br>";
+    }
+    if (strlen($titre) < 3 || strlen($titre) > 300){
+        $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
+        $i++;
+        echo $titre_erreur2;
+        echo "</br>";
+    }
+    if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
+        $vide_erreur = "Des champs sont vides";
+        $i++;
+        echo $vide_erreur;
+        echo "</br>";
+    }
+    else{
     $req = $bdd->prepare('INSERT INTO freeCitizenProduit (date, ville, type, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,? )');
     $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));
+    }
 }
 else {
     echo "vous n'etes pas connecté";

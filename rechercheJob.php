@@ -34,12 +34,14 @@
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
         require 'includes/themesJob.php';
+        require 'includes/bbcodeTexte.php';
         require 'objets/ObjetJob.php';
         
         echo '<section id="voirProjet"><h2>Toutes les propostions et recherches d\'emplois dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
                 $job = new Job($donnees);
+                $texte = $job->descriptif();
                 echo $job->id();
                 echo "</br>";
                 echo $job->titre();
@@ -56,7 +58,7 @@
                 echo "</br>";
                 echo $job->statut();
                 echo "</br>";
-                echo $job->descriptif();
+                echo $texte;
             }
             $request->closeCursor();
             echo'</section>';

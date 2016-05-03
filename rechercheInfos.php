@@ -34,13 +34,14 @@
         require 'includes/menuInfos.php';
         require 'includes/themesInfo.php';
         require 'objets/ObjetInfo.php';
+        require 'includes/bbcodeTexte.php';
         require 'objets/ObjetCommentaire.php';
         
         echo '<section id="voirNouvelles"><h2>Toutes les nouvelles dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenInfos WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
             $infos = new Info($donnees);
-            $idInfo = $infos->id();
+            $texte = $infos->texte();
             echo $infos->id();
             echo "</br>";
             echo $infos->titre();
@@ -53,12 +54,12 @@
             echo "</br>";
             echo $infos->idAuteur();
             echo "</br>";
-            echo $infos->texte();
+            echo $texte;
             
             echo "</br>";
             echo "</br>";
             
-          /*  echo '<section id="EnvoiCommentaire">';
+          echo '<section id="EnvoiCommentaire">';
             echo '<form action="'.$nomPage.'" method="post">';
             echo '<input type="text" name="texte" value="commenter" >';
             echo '<input type="hidden" name="idCommentateur" value="<?php echo $idCommentateur
@@ -85,7 +86,7 @@
                 echo "</br>";
             }
             $request1->closeCursor();
-                echo'</section>';*/
+                echo'</section>';
         }
         echo '</section>';
     }

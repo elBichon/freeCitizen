@@ -33,12 +33,14 @@
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
         require 'includes/themesEvent.php';
+        require 'includes/bbcodeTexte.php';
         require 'objets/ObjetEvent.php';
         
         echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenEvent WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
                 $Event = new Event($donnees);
+                $texte = $event->descriptif();
                 echo $event->id();
                 echo "</br>";
                 echo $event->titre();
@@ -55,7 +57,7 @@
                 echo "</br>";
                 echo $event->participant();
                 echo "</br>";
-                echo $event->descriptif();
+                echo $texte;
             }
             $request->closeCursor();
             echo'</section>';

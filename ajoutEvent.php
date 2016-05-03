@@ -20,27 +20,30 @@
 
 <?php
 if ($_SESSION['id'] != 0) {
-            echo '<h1>proposer des nouvelles</h1></br>';
+            echo '<h1>proposer des nouveaux projets</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
-            $mieuxNotes="infos.php";
-            $recherche="rechercheInfos.php";
-            $ajouter="ajoutInfos.php";
+            $mieuxNotes="projet.php";
+            $recherche="rechercheProjet.php";
+            $ajouter="ajoutProjet.php";
             require 'includes/ville.php';
             require 'includes/menu.php';
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
-            echo '<form action="ajoutInfos.php" method="post">';
+            echo '<form action="ajoutEvent.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" /><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" /><br />';
-                echo '<label for="texte">nouvelle</label> :<textarea name="texte" rows="10" cols="50">votre texte ici</textarea><br />';
-               echo '<input type="hidden" name="idAuteur" value="echo $idAuteur;" >';
+                echo '<label for="equipe">equipe</label> :<textarea name="equipe" rows="10" cols="50">votre equipe ici</textarea><br />';
+                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre projet ici</textarea><br />';
+               echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
+                echo '<input type="hidden" name="participant" value="0" >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
-        $req = $bdd->prepare('INSERT INTO freeCitizenInfos (date, ville, theme, idAuteur, texte) VALUES(NOW(),?,?,?,? )');
-        $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['texte']  ));
-    }
+    
+    $req = $bdd->prepare('INSERT INTO freeCitizenEvent (date, titre, dateDebut, theme, idAuteur, participant, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
+    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['participant'],$_POST['descriptif']  ));
+}
 else {
     echo "vous n'etes pas connecté";
 }?>

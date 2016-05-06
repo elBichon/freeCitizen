@@ -1,3 +1,5 @@
+//objet representant les infos
+
 <?php
     class Info
     {

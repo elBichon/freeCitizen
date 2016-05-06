@@ -1,3 +1,7 @@
+/*script de creation de la table produit
+type: type de produit
+statut: proposer ou recherche
+*/
 drop table if exists freeCitizenProduit;
 create table freeCitizenProduit (
 id integer not null primary key auto_increment,

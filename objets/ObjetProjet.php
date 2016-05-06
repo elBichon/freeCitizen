@@ -1,3 +1,5 @@
+//objet representant les projets
+
 <?php
     class Projet
     {

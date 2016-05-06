@@ -1,3 +1,11 @@
+/*script de creation de la table d event
+Ville
+date debut
+date de fin
+nb de participants
+*/
+
+
 drop table if exists freeCitizenEvent;
 create table freeCitizenEvent (
 id integer not null primary key auto_increment,

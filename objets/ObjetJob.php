@@ -1,3 +1,5 @@
+//objet représentant les produits
+
 <?php
     class Produit
     {

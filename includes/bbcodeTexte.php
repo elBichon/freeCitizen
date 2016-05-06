@@ -1,3 +1,7 @@
+//fonction BBCODE
+//reconnait certains caractères côté back
+//remplace ces caractères du côté front par des smileys ou des caractères spécifiques, gras, italique...
+
 <?php
 function code($texte)
 {
@@ -21,7 +25,6 @@ $texte = preg_replace('`\[i\](.+)\[/i\]`isU', '<em>$1</em>', $texte);
 $texte = preg_replace('`\[s\](.+)\[/s\]`isU', '<u>$1</u>', $texte);
 //lien
 $texte = preg_replace('#http://[a-z0-9._/-]+#i', '<a href="$0">$0</a>', $texte);
-//etc., etc.
 
 //On retourne la variable texte
 return $texte;

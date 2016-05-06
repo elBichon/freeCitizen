@@ -1,3 +1,5 @@
+/*script de creation des villes*/
+
 drop table if exists freeCitizenVilles;
 create table freeCitizenVilles (
 id integer not null primary key auto_increment,

@@ -1,3 +1,6 @@
+/*script de creation des membres
+stockage hashe des mdp
+*/
 drop table if exists freeCitizenMembres;
 create table freeCitizenMembres (
 id integer not null primary key auto_increment,

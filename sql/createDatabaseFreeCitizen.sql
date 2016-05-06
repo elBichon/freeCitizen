@@ -1,3 +1,5 @@
+/*script de creation de la bdd*/
+
 create database if not exists freeCitizen character set utf8 collate utf8_unicode_ci;
 use freeCitizen;
 

@@ -1,3 +1,5 @@
+/*script de création des infos */
+
 drop table if exists freeCitizenInfos;
 create table freeCitizenInfos (
 id integer not null primary key auto_increment,

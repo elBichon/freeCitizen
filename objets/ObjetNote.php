@@ -1,3 +1,5 @@
+//objet symbolisant les commentaires
+
 <?php
     class Commentaire
     {

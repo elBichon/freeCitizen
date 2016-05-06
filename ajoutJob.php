@@ -22,6 +22,7 @@
         </header>
 
 <?php
+
 if ($_SESSION['id'] != 0) {
             echo '<h1>proposer des nouveaux projets</h1></br>';
             require 'includes/connect.php';
@@ -46,7 +47,8 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
-    
+            
+    //recuperation des champs du formulaire  
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
     $titre = htmlspecialchars($_POST['type']);

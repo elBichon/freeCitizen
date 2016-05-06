@@ -1,3 +1,6 @@
+/*script de creation des job
+statut proposition ou recherche de jobs
+*/
 drop table if exists freeCitizenJob;
 create table freeCitizenJob (
 id integer not null primary key auto_increment,

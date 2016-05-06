@@ -1,3 +1,7 @@
+//formulaire pour la recherche des membres
+//recherche front par le login
+
+
 <div class="pluginRecherche">
     <form action="membresSuite.php" method="post">
         <div id="membresRecherche">

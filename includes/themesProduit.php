@@ -1,3 +1,8 @@
+//formulaire de recherche de produit
+//recherche par ville 
+//recherche par theme
+//proposition de produit ou recherche de produit
+
 <form method="post" action="<?php echo $nomPage; ?>">
     <label for="ville">Ou allons-nous ?</label></br>
 

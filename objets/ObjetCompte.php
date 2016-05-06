@@ -1,3 +1,5 @@
+//objet représentant les comptes
+
 <?php
     class Compte
     {

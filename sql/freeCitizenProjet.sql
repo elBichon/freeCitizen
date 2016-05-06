@@ -1,3 +1,7 @@
+/*script de creation de projets
+presentation de l equipe
+*/
+
 drop table if exists freeCitizenProjet;
 create table freeCitizenProjet (
 id integer not null primary key auto_increment,

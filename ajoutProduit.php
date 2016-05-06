@@ -21,7 +21,12 @@
         </header>
 
 <?php
+
+//verification que l utilisateur est connecte
 if ($_SESSION['id'] != 0) {
+    
+    //si l utilisateur est connecte
+    //appel aux scripts necessaires
             echo '<h1>proposer des nouveaux projets</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
@@ -33,6 +38,7 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
+//affichage du formulaire
             echo '<form action="ajoutProduit.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre"required /><br />';

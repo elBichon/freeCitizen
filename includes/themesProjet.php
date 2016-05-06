@@ -1,3 +1,7 @@
+//formulaire de recherche de projet
+//recherche par ville 
+//recherche par theme
+
 <form method="post" action="<?php echo $nomPage; ?>">
     <label for="ville">Ou allons-nous ?</label></br>
 

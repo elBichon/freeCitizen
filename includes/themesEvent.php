@@ -1,3 +1,7 @@
+//formulaire de recherche d event
+//recherche par ville 
+//recherche par theme
+
 <form method="post" action="<?php echo $nomPage; ?>">
     <label for="ville">Ou allons-nous ?</label></br>
 

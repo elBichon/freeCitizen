@@ -19,7 +19,11 @@
         </header>
 
 <?php
+//verification que l utilisateur est connecte
 if ($_SESSION['id'] != 0) {
+    
+    //si l utilisateur est connecte
+    //appel aux scripts necessaires
             echo '<h1>proposer des nouvelles</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
@@ -31,6 +35,7 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
+//affichage du formulaire
             echo '<form action="ajoutInfos.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" required/><br />';
@@ -40,17 +45,18 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
+    //recuperation des champs du formulaire  
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
     //$titre = htmlspecialchars($_POST['titre']);
     $theme = htmlspecialchars($_POST['theme']);
-    $texte = htmlspecialchars($_POST['texte']);*/
+    $texte = htmlspecialchars($_POST['texte']);
     
   $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenInfos WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
     $query->execute();
     $titre_free=($query->fetchColumn()==0)?1:0;
-    $query->CloseCursor();*/
+    $query->CloseCursor();
   
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";

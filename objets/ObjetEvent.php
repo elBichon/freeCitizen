@@ -1,3 +1,5 @@
+//objet symbolisant les events
+
 <?php
     class Event
     {

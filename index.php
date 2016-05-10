@@ -1,3 +1,5 @@
+
+//page d index
 <?php session_start();
     ?>
 
@@ -23,6 +25,8 @@
     </header>
 
 <?php
+
+//si l utilisateur est deja connecte
     if (isset($_SESSION['login'])) {
     echo '<h1>FREE CITIZEN</h1>';
         echo 'Il y a eu un problème de connexion, vous ne devriez pas voir ceci';
@@ -30,6 +34,8 @@
         echo 'rendez vous <a href="deconnexion.php">ICI</a>';
 
        }
+       
+       //formulaire de connexion
    else {
        require 'includes/connect.php';
     echo '<section id="connexion">';
@@ -53,6 +59,7 @@
         echo '</div>';
     echo '</section>';
 
+//formulaire d inscription
     echo '<section id="inscription">';
         echo '<h3>Inscription</h3></br>';
        echo '<div class="">';

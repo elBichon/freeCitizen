@@ -1,3 +1,5 @@
+
+//suite du formulaire de code oublie
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -38,6 +40,7 @@
 
 <?php
 
+//envoi du mail a l adresse fournie
 $email = htmlspecialchars($_POST['email']);
 $query1=$bdd->prepare('SELECT COUNT(*) AS nbr FROM freeCitizenMembres WHERE email =:email');
 $query1->bindValue(':email',$email, PDO::PARAM_STR);
@@ -45,18 +48,23 @@ $query1->execute();
 $mail_free=($query1->fetchColumn()==0)?1:0;
 $query1->CloseCursor();
 
+//verification que l adresse existe
 if($mail_free){
     $email_erreur1 = "Votre adresse email n'est pas dans notre base de données";
     $i++;
     echo $email_erreur1;
     echo "</br>";
 }
+
+//verification que le champ n est pas vide et que l adresse est a un format correct
 if (!preg_match("#^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$#", $email) || empty($email)){
     $email_erreur2 = "Votre adresse E-Mail n'a pas un format valide";
     $i++;
     echo $email_erreur2;
     echo "</br>";
 }
+
+//envoi du mail
 else {
     echo "un mail contenant votre mot de passe vous a été envoyé, pensez à vérifier vos spams";
     $mdp=$bdd->prepare('SELECT pass FROM freeCitizenMembres WHERE email =:email');

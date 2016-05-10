@@ -1,3 +1,5 @@
+
+//suite de la page d inscription
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -17,7 +19,9 @@
         <h1>Inscription</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="InscriptionSuite">
+            //verification ville cf includes
             <?php  include("includes/verificationVille.php"); ?>
+            //verification inscrption cf includes
             <?php  include("includes/mailConfirmationInscription.php"); ?>
         </section>
 

@@ -1,3 +1,5 @@
+
+//page des events
 <?php
     session_start();
         ?>
@@ -22,6 +24,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
+        
+        //variables necessaires
         $nomPage = "event.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -29,6 +33,8 @@
         $mieuxNotes="projet.php";
         $recherche="rechercheEvent.php";
         $ajouter="ajoutEvent.php";
+        
+        //appel aux plugins necessaires 
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
@@ -38,7 +44,11 @@
         echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenEvent WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date LIMIT 0, 10');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
+            
+            //appel au constructeur
                 $Event = new Event($donnees);
+                
+                //appel a la bdd
                 echo $event->id();
                 echo "</br>";
                 echo $event->titre();

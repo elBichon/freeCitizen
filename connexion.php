@@ -1,3 +1,5 @@
+
+//page d econnexion
 <?php
     session_start();
     ?>
@@ -25,9 +27,12 @@
 
     <section id="">
     <?php
+    
+    //echappement des champs recus
         $login = htmlspecialchars($_POST['login']);
         $pass_hache = sha1(htmlspecialchars($_POST['password']));
     
+    //verification que les champs sont remplis
         if (empty($login) || empty($pass_hache)){
             $connexion_erreur = "Vous devez renseigner un login et un mot de passe";
             $retour = "Cliquez <a href='./index.php'>ici</a> pour revenir à la page d'accueil";
@@ -36,6 +41,8 @@
             echo $retour;
         }
         else{
+            
+            //verification que le compte existe
             $req = $bdd->prepare('SELECT id FROM freeCitizenMembres WHERE login = :login AND pass = :pass AND confirmation = 1');
             $req->execute(array(
                                 'login' => $login,
@@ -43,9 +50,13 @@
             $resultat = $req->fetch();
         
         if (!$resultat){
+            
+            //si le champ n existe pas
             echo 'Mauvais identifiant ou mot de passe !';
         }
         else{
+            
+            //si le compte existe creation de la session 
             session_start();
             $_SESSION['id'] = $resultat['id'];
             $id = $_SESSION['id'];

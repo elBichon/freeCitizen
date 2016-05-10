@@ -1,3 +1,5 @@
+//page qui permet d'ajouter un nouvel événement à la liste des events
+
 <?php
     session_start();
         ?>
@@ -20,6 +22,8 @@
 
 <?php
 if ($_SESSION['id'] != 0) {
+    
+    //inclusion des modules necessaires
             echo '<h1>proposer des nouveaux projets</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
@@ -31,6 +35,7 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
+//formulaire d ajout des events
             echo '<form action="ajoutEvent.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" required/><br />';
@@ -42,7 +47,7 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
-    
+//verification back
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
     $titre = htmlspecialchars($_POST['type']);
@@ -56,24 +61,31 @@ if ($_SESSION['id'] != 0) {
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
     
+//titre non utilisé
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";
         $i++;
         echo $titre_erreur1;
         echo "</br>";
     }
+    
+    //taille du titre
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
         $i++;
         echo $titre_erreur2;
         echo "</br>";
     }
+    
+    //ville non vide
     if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
         echo "</br>";
     }
+    
+    //si tout est bon proceder a l insertion
     else{
     $req = $bdd->prepare('INSERT INTO freeCitizenEvent (date, titre, dateDebut, theme, idAuteur, participant, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
     $req->execute(array($_POST['ville'],$_POST['titre'] ,$_POST['theme'],$_POST['idAuteur'],$_POST['participant'],$_POST['descriptif']  ));

@@ -1,3 +1,5 @@
+//formulaire de recherche d events
+
 <?php
     session_start();
         ?>
@@ -22,6 +24,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
+        
+        //appel aux variables necessaires
         $nomPage = "rechercheEvent.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -29,6 +33,8 @@
         $mieuxNotes="projet.php";
         $recherche="rechercheEvent.php";
         $ajouter="ajoutEvent.php";
+        
+        //insertion des plugins necessaires
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
@@ -36,10 +42,13 @@
         require 'includes/bbcodeTexte.php';
         require 'objets/ObjetEvent.php';
         
+        //appel au constructeur de l objet event
         echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenEvent WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
                 $Event = new Event($donnees);
+                
+                //affichage des textes de la bdd
                 $texte = $event->descriptif();
                 echo $event->id();
                 echo "</br>";

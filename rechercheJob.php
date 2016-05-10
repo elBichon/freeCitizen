@@ -1,3 +1,5 @@
+//formulaire de recherche de jobs
+
 <?php
     session_start();
         ?>
@@ -22,6 +24,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
+        
+        //appel aux variables necessaires
         $nomPage = "rechercheProjet.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -30,6 +34,8 @@
         $mieuxNotes="job.php";
         $recherche="rechercheJob.php";
         $ajouter="ajoutJob.php";
+        
+         //insertion des plugins necessaires
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
@@ -40,8 +46,12 @@
         echo '<section id="voirProjet"><h2>Toutes les propostions et recherches d\'emplois dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
+            
+            //appel a l objet job
                 $job = new Job($donnees);
                 $texte = $job->descriptif();
+                
+                //affichage du contenu de la bdd
                 echo $job->id();
                 echo "</br>";
                 echo $job->titre();

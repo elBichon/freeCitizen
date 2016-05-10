@@ -1,3 +1,5 @@
+
+//page de confirmation de l inscription
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -17,6 +19,8 @@
     <body>
         <header>
         </header>
+        
+        //formulaire de demande de confirmation de l adresse email
         <h1>Confirmation de ton inscription</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="InscriptionSuiteConfirmation">

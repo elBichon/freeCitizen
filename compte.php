@@ -1,3 +1,5 @@
+
+//page de compte personnel
 <?php session_start();
     ?>
 
@@ -19,6 +21,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<header>';
         echo '</header>';
+        
+        //inclusion des plugins
         echo '<h1>Mon Compte</h1>';
         require 'includes/connect.php';
         include 'includes/ville.php';
@@ -31,7 +35,10 @@
             $request = $bdd->query('SELECT * FROM freeCitizenMembres WHERE id ="'.$id.'"');
             while ($donnees = $request->fetch(PDO::FETCH_ASSOC))
             {
+                //appel au constructeur de l objet compte
                 $compte = new Compte($donnees);
+                
+                //affichage des infos de la bdd
                 echo "id: ";
                 echo $compte->id();
                 echo "</br>";

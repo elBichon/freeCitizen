@@ -1,3 +1,5 @@
+
+//formulaire en cas de code oublie
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -25,7 +27,7 @@
     <section id="codeOublie">
         <h3>Donnez votre adresse email pour recevoir votre code</h3></br>
 
-
+//fournir son adresse mail
 <div class="">
 <form action="codeOublieSuite.php" method="post">
 <div id="emailCodeOublie">

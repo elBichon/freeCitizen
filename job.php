@@ -1,3 +1,6 @@
+//page des jobs
+//ajouter commentaire et note
+
 <?php
     session_start();
         ?>
@@ -20,6 +23,8 @@
 
 <?php
     if ($_SESSION['id'] != 0) {
+        
+        //appel aux plugins et variables
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
         $nomPage = "rechercheProjet.php";

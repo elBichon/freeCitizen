@@ -1,4 +1,4 @@
-//finir
+//page d ajout de jobs
 
 
 <?php
@@ -26,6 +26,8 @@
 if ($_SESSION['id'] != 0) {
             echo '<h1>proposer des nouveaux projets</h1></br>';
             require 'includes/connect.php';
+            
+            //inclusion des plugins
             $idAuteur=$_SESSION['id'];
             $mieuxNotes="job.php";
             $recherche="rechercheJob.php";
@@ -35,6 +37,8 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
+
+//formulaire d ajout
             echo '<form action="ajoutJob.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="type">type</label> :  <input type="text" name="theme" id="theme" required/><br />';
@@ -56,30 +60,38 @@ if ($_SESSION['id'] != 0) {
     $theme = htmlspecialchars($_POST['statut']);
     $texte = htmlspecialchars($_POST['descriptif']);
     
+    //verification front
     $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenJob WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
     $query->execute();
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
     
+//verification que le titre est libre
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";
         $i++;
         echo $titre_erreur1;
         echo "</br>";
     }
+    
+    //verification du format du titre
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
         $i++;
         echo $titre_erreur2;
         echo "</br>";
     }
+    
+    //verification que les champs ne sont pas vides
     if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
         echo "</br>";
     }
+    
+    //si tout est bon insertion dans la bdd
     else{
     $req = $bdd->prepare('INSERT INTO freeCitizenJob (date, ville, type, titre, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
     $req->execute(array($_POST['ville'], $_POST['type'],$_POST['idAuteur'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));

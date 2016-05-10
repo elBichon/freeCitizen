@@ -1,4 +1,5 @@
-//finir
+//formulaire d ajout de produit
+//possibilite de poster une recherche ou un ajout de produit
 
 <?php
     session_start();
@@ -52,6 +53,7 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
+    //recuperation des champs du formulaire pour verification back
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
     $titre = htmlspecialchars($_POST['type']);
@@ -65,24 +67,31 @@ if ($_SESSION['id'] != 0) {
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
     
+    //verification que le titre est disponnible
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";
         $i++;
         echo $titre_erreur1;
         echo "</br>";
     }
+
+    //verification du format
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
         $i++;
         echo $titre_erreur2;
         echo "</br>";
     }
+    
+    //verification que les champs ne sont pas vides
     if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
         echo "</br>";
     }
+    
+    //si tout est bon insertion dans la bdd
     else{
     $req = $bdd->prepare('INSERT INTO freeCitizenProduit (date, ville, type, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,? )');
     $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));

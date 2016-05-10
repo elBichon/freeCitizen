@@ -1,3 +1,5 @@
+//formulaire d ajout d infos
+
 <?php
     session_start();
         ?>
@@ -52,31 +54,37 @@ if ($_SESSION['id'] != 0) {
     $theme = htmlspecialchars($_POST['theme']);
     $texte = htmlspecialchars($_POST['texte']);
     
+    //verification back
   $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenInfos WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
     $query->execute();
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
   
+  //titre non utilise
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";
         $i++;
         echo $titre_erreur1;
         echo "</br>";
     }
+    
+    //taille du titre acceptable
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
         $i++;
         echo $titre_erreur2;
         echo "</br>";
     }
+    
+    //ville et champs non vides
     if (empty($ville) || empty($titre) || empty($ville) || empty($theme) || empty($texte)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
         echo "</br>";
     }
-    else{*/
+    else{
         $req = $bdd->prepare('INSERT INTO freeCitizenInfos (date, ville, titre, theme, idAuteur, texte) VALUES(NOW(),?,?,?,?,? )');
         $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['titre'],$_POST['texte']  ));
     }

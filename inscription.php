@@ -1,3 +1,5 @@
+
+//page d inscription
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -18,6 +20,8 @@
         <h1>Inscription</h1>
             <?php  include("includes/connect.php"); ?>
         <section id="InscriptionCheck">
+            
+            //verification
             <?php  include("includes/verificationInscription.php"); ?>
         </section>
 

@@ -1,3 +1,5 @@
+//formulaire de recherche de projets
+
 <?php
     session_start();
         ?>
@@ -22,6 +24,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières projets</h1></br>';
         require 'includes/connect.php';
+        
+        //appel aux variables necessaires
         $nomPage = "rechercheProjet.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -29,6 +33,8 @@
         $mieuxNotes="projet.php";
         $recherche="rechercheProjet.php";
         $ajouter="ajoutProjet.php";
+        
+        //insertion des plugins necessaires
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
@@ -36,9 +42,14 @@
         require 'includes/bbcodeTexte.php';
         require 'objets/ObjetProjet.php';
         
+        
+        //appel à l objet projet
         echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenProjet WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
+            
+            //constructeur
+            //affichage de la bdd
                 $projet = new Projet($donnees);
                 $texte = $projet->descriptif();
                 echo $projet->id();

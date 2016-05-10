@@ -1,3 +1,8 @@
+
+//page des infos
+//affichage par date des infos les mieux classées
+//reste a ajouter le formulaire de commentaires
+//ajouter notation
 <?php
     session_start();
         ?>
@@ -20,6 +25,8 @@
 
 <?php
 if ($_SESSION['id'] != 0) {
+        
+        //appel aux plugins et variables necessaires
             echo '<h1>Les dernières nouvelles</h1></br>';
             require 'includes/connect.php';
             $nomPage = "infos.php";
@@ -37,7 +44,10 @@ if ($_SESSION['id'] != 0) {
             $request = $bdd->query('SELECT * FROM freeCitizenInfos WHERE ville = "'.$ville.'" ORDER BY date LIMIT 0, 10');
                 while ($donnees = $request->fetch(PDO::FETCH_ASSOC))
                     {
+                        //constructeur de l objet info
                         $infos = new Info($donnees);
+                        
+                        //appel aux methodes et a la bdd
                             echo $infos->id();
                             echo "</br>";
                             echo $infos->titre();

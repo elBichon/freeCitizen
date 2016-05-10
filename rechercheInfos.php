@@ -1,3 +1,5 @@
+//formulaire de recherche d infos
+
 <?php
     session_start();
         ?>
@@ -22,6 +24,8 @@
     if ($_SESSION['id'] != 0) {
         echo '<h1>Les dernières nouvelles</h1></br>';
         require 'includes/connect.php';
+        
+        //appel aux variables necessaires
         $nomPage = "rechercheInfos.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -29,6 +33,8 @@
         $mieuxNotes="infos.php";
         $recherche="rechercheInfos.php";
         $ajouter="ajoutInfos.php";
+        
+         //insertion des plugins necessaires
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
@@ -40,8 +46,12 @@
         echo '<section id="voirNouvelles"><h2>Toutes les nouvelles dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenInfos WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
+            
+            //appel au constructeur de l objet info
             $infos = new Info($donnees);
             $texte = $infos->texte();
+            
+            //azffichage de la bdd
             echo $infos->id();
             echo "</br>";
             echo $infos->titre();

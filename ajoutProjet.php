@@ -1,3 +1,5 @@
+//formulaire d ajout de projet
+
 <?php
     session_start();
         ?>
@@ -47,6 +49,7 @@ if ($_SESSION['id'] != 0) {
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
+    //recupertation des champs pour verification back
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
     $titre = htmlspecialchars($_POST['titre']);
@@ -60,24 +63,31 @@ if ($_SESSION['id'] != 0) {
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
     
+    //verification que le titre est libre
     if(!$titre_free){
         $titre_erreur1 = "Votre pseudo est déjà utilisé par un membre";
         $i++;
         echo $titre_erreur1;
         echo "</br>";
     }
+    
+    //verification du format du titre
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre pseudo est soit trop grand, soit trop petit";
         $i++;
         echo $titre_erreur2;
         echo "</br>";
     }
+    
+    //verification que les champs ne sont pas vides
     if (empty($ville) || empty($titre) || empty($ville) || empty($theme) || empty($equipe) || empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
         echo "</br>";
     }
+    
+    //sinon insertion dans la bdd
     else{
     $req = $bdd->prepare('INSERT INTO freeCitizenProjet (date, ville, theme, titre, idAuteur, equipe, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
     $req->execute(array($_POST['ville'], $_POST['theme'], $_POST['titre'],$_POST['idAuteur'],$_POST['equipe'],$_POST['descriptif']  ));

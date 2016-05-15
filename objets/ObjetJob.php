@@ -1,17 +1,16 @@
-//objet représentant les produits
+<!--/*objet représentant les jobs*/-->
 
 <?php
-    class Produit
+    class Job
     {
         private $_id,
         $_titre,
         $_date,//date de publication de l article
-        $_dateTot,
-        $_dateTard,
         $_ville,//ville ou l info a lieu
         $_type,//
         $_statut,//rechercher ou proposer
         $_idAuteur,//jointure avec la table membre et appel a l objet compte
+        $_votes,
         $_descriptif;
         
         
@@ -47,14 +46,6 @@
         {
             return $this->_date;
         }
-        public function dateTot()
-        {
-            return $this->_dateTot;
-        }
-        public function dateTard()
-        {
-            return $this->_dateTard;
-        }
         public function ville()
         {
             return $this->_ville;
@@ -70,6 +61,10 @@
         public function idAuteur()
         {
             return $this->_idAuteur;
+        }
+        public function votes()
+        {
+            return $this->_votes;
         }
         public function descriptif()
         {
@@ -98,14 +93,6 @@
         {
             $this->_date = $date;
         }
-        public function setDateTot($dateTot)
-        {
-            $this->_dateTot = $dateTot;
-        }
-        public function setDateTard($dateTard)
-        {
-            $this->_dateTard = $dateTard;
-        }
         public function setVille($ville)
         {
             if (is_string($ville))
@@ -133,6 +120,14 @@
             if ($idAuteur > 0)
             {
                 $this->_idAuteur = $idAuteur;
+            }
+        }
+        public function setVotes($votes)
+        {
+            $votes = (int) $votes;
+            if ($votes > 0)
+            {
+                $this->_votes = $votes;
             }
         }
         public function setDescriptif($descriptif)

@@ -1,9 +1,7 @@
-//formulaire de recherche de projet
-//recherche par ville 
-//recherche par theme
+
 
 <form method="post" action="<?php echo $nomPage; ?>">
-    <label for="ville">Ou allons-nous ?</label></br>
+    <label for="ville">Ou allons-nous ?</label>
 
 
     <select name="ville" id="ville">
@@ -17,7 +15,7 @@
             }
             ?>
     </select>
-<label for="theme">Que cherchons-nous ?</label></br>
+<label for="theme">Que cherchons-nous ?</label>
     <select name="theme" id="theme">
     <?php
         $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenProjet ORDER BY theme");

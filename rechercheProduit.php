@@ -22,18 +22,17 @@
 
 <?php
     if ($_SESSION['id'] != 0) {
-        echo '<h1>Les dernières projets</h1></br>';
+        echo '<h1>rechercher un produit</h1></br>';
         require 'includes/connect.php';
         
         //appel aux variables necessaires
-        $nomPage = "rechercheProjet.php";
+        $nomPage = "rechercheProduit.php";
         $ville = $_POST['ville'];
-        $theme = $_POST['theme'];
+        $type = $_POST['type'];
         $statut = $_POST['statut'];
-        $idCommentateur=$_SESSION['id'];
-        $mieuxNotes="projet.php";
-        $recherche="rechercheProjet.php";
-        $ajouter="ajoutProjet.php";
+        $mieuxNotes="produit.php";
+        $recherche="rechercheProduit.php";
+        $ajouter="ajoutProduit.php";
         
         //insertion des plugins necessaires
         require 'includes/menu.php';
@@ -45,29 +44,27 @@
         
         //appel a l objet produit
         echo '<section id="voirProjet"><h2>Toutes les propostions et recherches de produits dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
+        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND type = "'.$type.'" AND statut =  "'.$statut.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
             
             //appel au constructeur
                 $produit = new Produit($donnees);
-                $texte = $produit->descriptif();
                 
                 //affichage du contenu de la bdd
-                echo $produit->id();
-                echo "</br>";
-                echo $produit->titre();
-                echo "</br>";
-                echo $produit->date();
-                echo "</br>";
-                echo $produit->dateDisponnibilite();
-                echo "</br>";
-                echo $produit->ville();
-                echo "</br>";
-                echo $produit->type();
-                echo "</br>";
-                echo $produit->statut();
-                echo "</br>";
-                echo $texte;
+            echo $produit->id();
+            echo "</br>";
+            echo $produit->titre();
+            echo "</br>";
+            echo $produit->date();
+            echo "</br>";
+            echo $produit->ville();
+            echo "</br>";
+            echo $produit->type();
+            echo "</br>";
+            echo $produit->statut();
+            echo "</br>";
+            $texte = $produit->descriptif();
+            echo $texte;
             }
             $request->closeCursor();
             echo'</section>';

@@ -1,4 +1,3 @@
-//bandeau deroulant mis a jour automatiquement a l ajout d une nouvelle ville
 
 <form method="post" action="<?php echo $nomPage; ?>">
     <label for="ville">Ou allons-nous ?</label></br>

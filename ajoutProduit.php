@@ -28,12 +28,11 @@ if ($_SESSION['id'] != 0) {
     
     //si l utilisateur est connecte
     //appel aux scripts necessaires
-            echo '<h1>proposer des nouveaux projets</h1></br>';
+            echo '<h1>proposer des nouveaux produits</h1></br>';
             require 'includes/connect.php';
-            $idAuteur=$_SESSION['id'];
-            $mieuxNotes="produit.php";
-            $recherche="rechercheProduit.php";
-            $ajouter="ajoutProduit.php";
+            $mieuxNotes = "produit.php";
+            $recherche = "rechercheProduit.php";
+            $ajouter = "ajoutProduit.php";
             require 'includes/ville.php';
             require 'includes/menu.php';
             require 'includes/menuServices.php';
@@ -42,24 +41,24 @@ if ($_SESSION['id'] != 0) {
 //affichage du formulaire
             echo '<form action="ajoutProduit.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
-                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre"required /><br />';
-                echo '<label for="equipe">type</label> :<textarea name="type" rows="10" cols="50">genre de produit</textarea><br />';
-                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre projet ici</textarea><br />';
+                echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" required /><br />';
+                echo '<label for="equipe">type</label> : <input type="text" name="type" id="type" required /><br />';                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50">votre produit ici</textarea><br />';
                 echo '<select name="statut" id="statut">';
                     echo '<option value="proposition">proposition</option>';
                     echo '<option value="recherche">recherche</option>';
-                echo '</select>
+                echo '</select>';
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
+                echo '<input type="hidden" name="vote" value=0 >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
     //recuperation des champs du formulaire pour verification back
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
-    $titre = htmlspecialchars($_POST['type']);
-    $theme = htmlspecialchars($_POST['titre']);
-    $theme = htmlspecialchars($_POST['statut']);
-    $texte = htmlspecialchars($_POST['descriptif']);
+    $titre = htmlspecialchars($_POST['titre']);
+    $type = htmlspecialchars($_POST['type']);
+    $descriptif = htmlspecialchars($_POST['descriptif']);
+    $statut = htmlspecialchars($_POST['statut']);
     
     $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenProduit WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
@@ -93,8 +92,8 @@ if ($_SESSION['id'] != 0) {
     
     //si tout est bon insertion dans la bdd
     else{
-    $req = $bdd->prepare('INSERT INTO freeCitizenProduit (date, ville, type, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,? )');
-    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));
+    $req = $bdd->prepare('INSERT INTO freeCitizenProduit (date, ville, titre, type, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,?,?)');
+    $req->execute(array($_POST['ville'], $_POST['titre'], $_POST['type'], $_POST['idAuteur'], $_POST['statut'],$_POST['descriptif']));
     }
 }
 else {

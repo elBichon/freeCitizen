@@ -22,15 +22,14 @@
 
 <?php
     if ($_SESSION['id'] != 0) {
-        echo '<h1>Les dernières projets</h1></br>';
+        echo '<h1>Rechercher un job</h1></br>';
         require 'includes/connect.php';
         
         //appel aux variables necessaires
-        $nomPage = "rechercheProjet.php";
+        $nomPage = "rechercheJob.php";
         $ville = $_POST['ville'];
-        $theme = $_POST['theme'];
+        $type = $_POST['type'];
         $statut = $_POST['statut'];
-        $idCommentateur=$_SESSION['id'];
         $mieuxNotes="job.php";
         $recherche="rechercheJob.php";
         $ajouter="ajoutJob.php";
@@ -44,13 +43,10 @@
         require 'objets/ObjetJob.php';
         
         echo '<section id="voirProjet"><h2>Toutes les propostions et recherches d\'emplois dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date DESC');
+        $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND type = "'.$type.'" AND statut =  "'.$statut.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
-            
             //appel a l objet job
                 $job = new Job($donnees);
-                $texte = $job->descriptif();
-                
                 //affichage du contenu de la bdd
                 echo $job->id();
                 echo "</br>";
@@ -58,16 +54,13 @@
                 echo "</br>";
                 echo $job->date();
                 echo "</br>";
-                echo $job->dateTot();
-                echo "</br>";
-                echo $job->dateTard();
-                echo "</br>";
                 echo $job->ville();
                 echo "</br>";
                 echo $job->type();
                 echo "</br>";
                 echo $job->statut();
                 echo "</br>";
+                $texte = $job->descriptif();
                 echo $texte;
             }
             $request->closeCursor();

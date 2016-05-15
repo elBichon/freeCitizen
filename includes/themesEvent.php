@@ -1,9 +1,6 @@
-//formulaire de recherche d event
-//recherche par ville 
-//recherche par theme
 
 <form method="post" action="<?php echo $nomPage; ?>">
-    <label for="ville">Ou allons-nous ?</label></br>
+    <label for="ville">Ou allons-nous ?</label>
 
 
     <select name="ville" id="ville">
@@ -17,7 +14,7 @@
             }
             ?>
     </select>
-<label for="theme">Que cherchons-nous ?</label></br>
+<label for="theme">Que cherchons-nous ?</label>
     <select name="theme" id="theme">
     <?php
         $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenEvent ORDER BY theme");

@@ -6,11 +6,11 @@
         private $_id,
         $_titre,
         $_date,//date de publication de l article
-        $_dateDisponnibilite,
         $_ville,//ville ou l info a lieu
         $_type,//
         $_statut,//rechercher ou proposer
         $_idAuteur,//jointure avec la table membre et appel a l objet compte
+        $_votes,
         $_descriptif;
         
         
@@ -65,6 +65,10 @@
         public function idAuteur()
         {
             return $this->_idAuteur;
+        }
+        public function votes()
+        {
+            return $this->_votes;
         }
         public function descriptif()
         {
@@ -124,6 +128,14 @@
             if ($idAuteur > 0)
             {
                 $this->_idAuteur = $idAuteur;
+            }
+        }
+        public function setVotes($votes)
+        {
+            $votes = (int) $votes;
+            if ($votes > 0)
+            {
+                $this->_votes = $votes;
             }
         }
         public function setDescriptif($descriptif)

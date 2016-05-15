@@ -1,5 +1,4 @@
-//formulaire pour la recherche des membres
-//recherche front par le login
+
 
 
 <div class="pluginRecherche">

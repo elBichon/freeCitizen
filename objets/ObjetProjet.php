@@ -6,11 +6,11 @@
         private $_id,
         $_titre,
         $_date,//date de publication de l article
-        $_dateDebut;
         $_ville,//ville ou l info a lieu
         $_theme,//theme de l article, ecologie, politique, finance...
         $_idAuteur,//jointure avec la table membre et appel a l objet compte
         $_equipe,
+        $_votes,
         $_descriptif;
         
         
@@ -46,10 +46,6 @@
         {
             return $this->_date;
         }
-        /*public function dateDebut()
-        {
-            return $this->_dateDebut;
-        }*/
         public function ville()
         {
             return $this->_ville;
@@ -65,6 +61,10 @@
         public function equipe()
         {
             return $this->_equipe;
+        }
+        public function votes()
+        {
+            return $this->_votes;
         }
         public function descriptif()
         {
@@ -93,10 +93,6 @@
         {
             $this->_date = $date;
         }
-     /*   public function setDateDebut($dateDebut)
-        {
-            $this->_dateDebut = $dateDebut;
-        }*/
         public function setVille($ville)
         {
             if (is_string($ville))
@@ -124,6 +120,14 @@
             if (is_string($equipe))
             {
                 $this->_equipe = $equipe;
+            }
+        }
+        public function setVotes($votes)
+        {
+            $votes = (int) $votes;
+            if ($votes > 0)
+            {
+                $this->_votes = $votes;
             }
         }
         public function setDescriptif($descriptif)

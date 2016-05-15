@@ -24,36 +24,38 @@
 if ($_SESSION['id'] != 0) {
     
     //inclusion des modules necessaires
-            echo '<h1>proposer des nouveaux projets</h1></br>';
+            echo '<h1>proposer des nouveaux événements</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
-            $mieuxNotes="projet.php";
-            $recherche="rechercheProjet.php";
-            $ajouter="ajoutProjet.php";
+            $mieuxNotes="event.php";
+            $recherche="rechercheEvent.php";
+            $ajouter="ajoutEvent.php";
             require 'includes/ville.php';
             require 'includes/menu.php';
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
 //formulaire d ajout des events
-            echo '<form action="ajoutEvent.php" method="post">';
+           echo '<form action="ajoutEvent.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" required/><br />';
                 echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" required/><br />';
-                echo '<label for="equipe">equipe</label> :<textarea name="equipe" rows="10" cols="50" required>votre equipe ici</textarea><br />';
-                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50" required>votre projet ici</textarea><br />';
+                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50" required>votre événement ici</textarea><br />';
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
-                echo '<input type="hidden" name="participant" value="0" >';
+                echo '<input type="hidden" name="participant" value=0 >';
+                echo '<input type="hidden" name="vote" value=0 >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
 //verification back
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
-    $titre = htmlspecialchars($_POST['type']);
-    $theme = htmlspecialchars($_POST['titre']);
-    $theme = htmlspecialchars($_POST['statut']);
-    $texte = htmlspecialchars($_POST['descriptif']);
+    $titre= htmlspecialchars($_POST['titre']);
+    $theme= htmlspecialchars($_POST['theme']);
+    $idAuteur= htmlspecialchars($_POST['idAuteur']);
+    $descriptif= htmlspecialchars($_POST['descriptif']);
+    
+   
     
     $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenEvent WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
@@ -78,7 +80,7 @@ if ($_SESSION['id'] != 0) {
     }
     
     //ville non vide
-    if (empty($ville) || empty($titre) || empty($type) || empty($statut)|| empty($descriptif)){
+    if (empty($ville) || empty($titre) || empty($theme) || empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
@@ -87,8 +89,8 @@ if ($_SESSION['id'] != 0) {
     
     //si tout est bon proceder a l insertion
     else{
-    $req = $bdd->prepare('INSERT INTO freeCitizenEvent (date, titre, dateDebut, theme, idAuteur, participant, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
-    $req->execute(array($_POST['ville'],$_POST['titre'] ,$_POST['theme'],$_POST['idAuteur'],$_POST['participant'],$_POST['descriptif']  ));
+            $req = $bdd->prepare('INSERT INTO freeCitizenEvent (date, ville, titre, theme, idAuteur, descriptif) VALUES(NOW(),?,?,?,?,?)');
+            $req->execute(array($_POST['ville'], $_POST['titre'],$_POST['theme'],$_POST['idAuteur'],$_POST['descriptif']));
     }
 }
 else {

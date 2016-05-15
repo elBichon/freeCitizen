@@ -1,4 +1,3 @@
-//formulaire d ajout d infos
 
 <?php
     session_start();
@@ -21,11 +20,9 @@
         </header>
 
 <?php
-//verification que l utilisateur est connecte
+
 if ($_SESSION['id'] != 0) {
     
-    //si l utilisateur est connecte
-    //appel aux scripts necessaires
             echo '<h1>proposer des nouvelles</h1></br>';
             require 'includes/connect.php';
             $idAuteur=$_SESSION['id'];
@@ -37,31 +34,34 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
-//affichage du formulaire
             echo '<form action="ajoutInfos.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
                 echo '<label for="theme">theme</label> :  <input type="text" name="theme" id="theme" required/><br />';
                 echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" required/><br />';
                 echo '<label for="texte">nouvelle</label> : <textarea name="texte" rows="10" cols="50" required>votre texte ici</textarea><br />';
-               echo '<input type="hidden" name="idAuteur" value="echo $idAuteur;" >';
+               echo '<input type="hidden" name="idAuteur" value=echo $idAuteur; >';
+               echo '<input type="hidden" name="vote" value=0 >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
-    //recuperation des champs du formulaire  
+
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
-    //$titre = htmlspecialchars($_POST['titre']);
+    $titre = htmlspecialchars($_POST['titre']);
     $theme = htmlspecialchars($_POST['theme']);
     $texte = htmlspecialchars($_POST['texte']);
+    $idAuteur = htmlspecialchars($_POST['idAuteur']);
+    echo $idAuteur;
     
-    //verification back
+
+
   $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenInfos WHERE titre =:titre');
     $query->bindValue(':titre',$titre, PDO::PARAM_STR);
     $query->execute();
     $titre_free=($query->fetchColumn()==0)?1:0;
     $query->CloseCursor();
   
-  //titre non utilise
+
     if(!$titre_free){
         $titre_erreur1 = "Votre titre est déjà utilisé";
         $i++;
@@ -69,7 +69,7 @@ if ($_SESSION['id'] != 0) {
         echo "</br>";
     }
     
-    //taille du titre acceptable
+    
     if (strlen($titre) < 3 || strlen($titre) > 300){
         $titre_erreur2 = "Votre titre est soit trop grand, soit trop petit";
         $i++;
@@ -77,7 +77,6 @@ if ($_SESSION['id'] != 0) {
         echo "</br>";
     }
     
-    //ville et champs non vides
     if (empty($ville) || empty($titre) || empty($ville) || empty($theme) || empty($texte)){
         $vide_erreur = "Des champs sont vides";
         $i++;
@@ -85,14 +84,13 @@ if ($_SESSION['id'] != 0) {
         echo "</br>";
     }
     else{
-        $req = $bdd->prepare('INSERT INTO freeCitizenInfos (date, ville, titre, theme, idAuteur, texte) VALUES(NOW(),?,?,?,?,? )');
-        $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['titre'],$_POST['texte']  ));
+    $req = $bdd->prepare('INSERT INTO freeCitizenInfos (date, ville, theme, idAuteur, titre, texte) VALUES(NOW(),?,?,?,?,?)');
+    $req->execute(array($_POST['ville'], $_POST['theme'],$_POST['idAuteur'],$_POST['titre'],$_POST['texte']));
     }
 }
 else {
     echo "vous n'etes pas connecté";
-}?>
-   <?php
+}
     echo '<footer>';
                 require 'includes/footer.php';
     echo '</footer>';

@@ -45,31 +45,39 @@
         
         //appel à l objet projet
         echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
+    
         $request = $bdd->query('SELECT * FROM freeCitizenProjet WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
             
-            //constructeur
-            //affichage de la bdd
-                $projet = new Projet($donnees);
-                $texte = $projet->descriptif();
-                echo $projet->id();
-                echo "</br>";
-                echo $projet->titre();
-                echo "</br>";
-                echo $projet->date();
-                echo "</br>";
-                echo $projet->ville();
-                echo "</br>";
-                echo $projet->theme();
-                echo "</br>";
-                echo $projet->idAuteur();
-                echo "</br>";
-                echo $projet->equipe();
-                echo "</br>";
-                echo $texte;
-            }
-            $request->closeCursor();
-            echo'</section>';
+            //appel au constructeur
+            $projet = new Projet($donnees);
+            
+            //affichage du contenu de la bdd
+            echo $projet->id();
+            echo "</br>";
+            echo $projet->titre();
+            echo "</br>";
+            echo $projet->date();
+            echo "</br>";
+            echo $projet->ville();
+            echo "</br>";
+            echo $projet->theme();
+            echo "</br>";
+            echo $projet->idAuteur();
+            echo "</br>";
+            echo $projet->equipe();
+            echo "</br>";
+            echo $projet->votes();
+            echo "</br>";
+            $texte = $projet->descriptif();
+            echo $texte;
+        }
+        $request->closeCursor();
+        echo'</section>';
+
+        
+        
+        
         }
     else {
         echo "vous n'etes pas connecté";

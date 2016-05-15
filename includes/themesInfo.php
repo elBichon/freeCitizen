@@ -1,11 +1,7 @@
-//formulaire de recherche d infos
-//recherche par ville 
-//recherche par theme
+
 
 <form method="post" action="<?php echo $nomPage; ?>">
     <label for="ville">Ou allons-nous ?</label></br>
-
-
     <select name="ville" id="ville">
     <?php
         $reponse = $bdd->query("SELECT DISTINCT ville FROM freeCitizenInfos ORDER BY ville");
@@ -17,10 +13,11 @@
             }
             ?>
     </select>
-<label for="theme">Que cherchons-nous ?</label></br>
-    <select name="theme" id="theme">
+
+    <label for="ville">Que cherchons-nous ?</label>
+    <select name="theme" id="theme"">
     <?php
-        $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenInfos ORDER BY theme");
+        $reponse = $bdd->query("SELECT DISTINCT theme FROM freeCitizenInfos ORDER BY ville");
         while ($donnees = $reponse->fetch())
         {
             ?>
@@ -29,7 +26,6 @@
             }
             ?>
     </select>
-
 
 <div class="bouton"><input type="submit" class="text" value="aller"/></div>
 </form>

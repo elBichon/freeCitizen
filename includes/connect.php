@@ -1,4 +1,4 @@
-//connexion à la base de données
+
 
 <?php
     try

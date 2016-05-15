@@ -29,8 +29,7 @@
         $nomPage = "rechercheEvent.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
-        $idCommentateur=$_SESSION['id'];
-        $mieuxNotes="projet.php";
+        $mieuxNotes="event.php";
         $recherche="rechercheEvent.php";
         $ajouter="ajoutEvent.php";
         
@@ -43,20 +42,18 @@
         require 'objets/ObjetEvent.php';
         
         //appel au constructeur de l objet event
-        echo '<section id="voirProjet"><h2>Tous les projets dans cette ville</h2>';
+        echo '<section id="voirProjet"><h2>Tous les événements dans cette ville</h2>';
         $request = $bdd->query('SELECT * FROM freeCitizenEvent WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
-                $Event = new Event($donnees);
+            
+                $event = new Event($donnees);
                 
                 //affichage des textes de la bdd
-                $texte = $event->descriptif();
                 echo $event->id();
                 echo "</br>";
                 echo $event->titre();
                 echo "</br>";
                 echo $event->date();
-                echo "</br>";
-                echo $event->dateDebut();
                 echo "</br>";
                 echo $event->ville();
                 echo "</br>";
@@ -64,8 +61,11 @@
                 echo "</br>";
                 echo $event->idAuteur();
                 echo "</br>";
+                echo $event->votes();
+                echo "</br>";
                 echo $event->participant();
                 echo "</br>";
+                $texte = $event->descriptif();
                 echo $texte;
             }
             $request->closeCursor();

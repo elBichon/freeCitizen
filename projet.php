@@ -31,13 +31,18 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menu.php';
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
+            require 'includes/themesProjet.php';
+            require 'includes/bbcodeTexte.php';
             require 'objets/ObjetProjet.php';
     
     echo '<section id="voirProjet"><h2>Les derniers projets dans cette ville</h2>';
-    $request = $bdd->query('SELECT * FROM freeCitizenProjet WHERE ville = "'.$ville.'" ORDER BY date LIMIT 0, 10');
+    $request = $bdd->query('SELECT * FROM freeCitizenProjet WHERE ville = "'.$ville.'" ORDER BY votes LIMIT 0, 10');
     while ($donnees = $request->fetch(PDO::FETCH_ASSOC))
     {
+        //appel au constructeur
         $projet = new Projet($donnees);
+        
+        //affichage du contenu de la bdd
         echo $projet->id();
         echo "</br>";
         echo $projet->titre();
@@ -48,9 +53,14 @@ if ($_SESSION['id'] != 0) {
         echo "</br>";
         echo $projet->theme();
         echo "</br>";
+        echo $projet->idAuteur();
+        echo "</br>";
         echo $projet->equipe();
         echo "</br>";
-        echo $projet->descriptif();
+        echo $projet->votes();
+        echo "</br>";
+        $texte = $projet->descriptif();
+        echo $texte;
     }
     $request->closeCursor();
     echo '</section>';

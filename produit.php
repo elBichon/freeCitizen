@@ -20,43 +20,46 @@
 
 <?php
     if ($_SESSION['id'] != 0) {
-        echo '<h1>Les dernières projets</h1></br>';
+        echo '<h1>Les derniers produits</h1></br>';
         require 'includes/connect.php';
-        $nomPage = "rechercheProjet.php";
+        $nomPage = "produit.php";
         $ville = $_POST['ville'];
-        $theme = $_POST['theme'];
+        $type = $_POST['type'];
         $statut = $_POST['statut'];
-        $idCommentateur=$_SESSION['id'];
         $mieuxNotes="produit.php";
         $recherche="rechercheProduit.php";
         $ajouter="ajoutProduit.php";
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
-        require 'includes/themesJob.php';
+        require 'includes/themesProduit.php';
         require 'objets/ObjetProduit.php';
+        require 'includes/bbcodeTexte.php';
         
-        echo '<section id="voirProjet"><h2>Toutes les propostions et recherches de produits dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date LIMIT 0, 10');
+        echo '<section id="voirProduit"><h2>Les meilleures propostions et recherches de produits dans cette ville</h2>';
+        $request = $bdd->query('SELECT * FROM freeCitizenProduit WHERE ville = "'.$ville.'" AND type = "'.$type.'" AND statut =  "'.$statut.'" ORDER BY votes LIMIT 0, 10');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
-                $produit = new Produit($donnees);
-                echo $produit->id();
-                echo "</br>";
-                echo $produit->titre();
-                echo "</br>";
-                echo $produit->date();
-                echo "</br>";
-                echo $produit->dateDiponnibilite();
-                echo "</br>";
-                echo $produit->ville();
-                echo "</br>";
-                echo $produit->type();
-                echo "</br>";
-                echo $produit->statut();
-                echo "</br>";
-                echo $produit->descriptif();
-            }
-            $request->closeCursor();
+            
+            $produit = new Produit($donnees);
+            
+            echo $produit->id();
+            echo "</br>";
+            echo $produit->titre();
+            echo "</br>";
+            echo $produit->date();
+            echo "</br>";
+            echo $produit->ville();
+            echo "</br>";
+            echo $produit->type();
+            echo "</br>";
+            echo $produit->statut();
+            echo "</br>";
+            echo $produit->votes();
+            echo "</br>";
+            $texte = $produit->descriptif();
+            echo $texte;
+        }
+        $request->closeCursor();
             echo'</section>';
         }
     else {

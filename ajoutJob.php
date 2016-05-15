@@ -1,5 +1,3 @@
-//page d ajout de jobs
-
 
 <?php
     session_start();
@@ -22,9 +20,8 @@
         </header>
 
 <?php
-
 if ($_SESSION['id'] != 0) {
-            echo '<h1>proposer des nouveaux projets</h1></br>';
+            echo '<h1>proposer des nouveaux jobs</h1></br>';
             require 'includes/connect.php';
             
             //inclusion des plugins
@@ -37,28 +34,28 @@ if ($_SESSION['id'] != 0) {
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
 
-
 //formulaire d ajout
             echo '<form action="ajoutJob.php" method="post">';
                 echo '<label for="ville">ville</label> :  <input type="text" name="ville" id="ville" required/><br />';
-                echo '<label for="type">type</label> :  <input type="text" name="theme" id="theme" required/><br />';
+                echo '<label for="type">type</label> :  <input type="text" name="type" id="type" required/><br />';
                 echo '<label for="titre">titre</label> :  <input type="text" name="titre" id="titre" required/><br />';
-                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50" required>votre projet ici</textarea><br />';
+                echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50" required>votre proposition ici</textarea><br />';
                 echo '<select name="statut" id="statut">';
                     echo '<option value="proposition">proposition</option>';
                     echo '<option value="recherche">recherche</option>';
-                echo '</select>
+                echo '</select>';
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
+                echo '<input type="hidden" name="vote" value=0 >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
-            
+   
     //recuperation des champs du formulaire  
     $i = 0;
     $ville = htmlspecialchars($_POST['ville']);
-    $titre = htmlspecialchars($_POST['type']);
-    $theme = htmlspecialchars($_POST['titre']);
-    $theme = htmlspecialchars($_POST['statut']);
-    $texte = htmlspecialchars($_POST['descriptif']);
+    $titre = htmlspecialchars($_POST['titre']);
+    $type = htmlspecialchars($_POST['type']);
+    $statut = htmlspecialchars($_POST['statut']);
+    $descriptif = htmlspecialchars($_POST['descriptif']);
     
     //verification front
     $query=$bdd->prepare('SELECT COUNT(*) FROM freeCitizenJob WHERE titre =:titre');
@@ -93,8 +90,8 @@ if ($_SESSION['id'] != 0) {
     
     //si tout est bon insertion dans la bdd
     else{
-    $req = $bdd->prepare('INSERT INTO freeCitizenJob (date, ville, type, titre, idAuteur, statut, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
-    $req->execute(array($_POST['ville'], $_POST['type'],$_POST['idAuteur'],$_POST['idAuteur'],$_POST['statut'],$_POST['descriptif']  ));
+    $req = $bdd->prepare('INSERT INTO freeCitizenJob (date, titre, ville, type, statut, idAuteur, descriptif) VALUES(NOW(),?,?,?,?,?,?)');
+    $req->execute(array($_POST['titre'], $_POST['ville'],$_POST['type'], $_POST['statut'],$_POST['idAuteur'],$_POST['descriptif']));
     }
 }
 else {
@@ -112,4 +109,5 @@ else {
 <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
+
 

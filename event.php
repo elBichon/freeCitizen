@@ -46,7 +46,7 @@
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
             
             //appel au constructeur
-                $Event = new Event($donnees);
+                $event = new event($donnees);
                 
                 //appel a la bdd
                 echo $event->id();
@@ -55,17 +55,19 @@
                 echo "</br>";
                 echo $event->date();
                 echo "</br>";
-                echo $event->dateDebut();
-                echo "</br>";
                 echo $event->ville();
                 echo "</br>";
                 echo $event->theme();
                 echo "</br>";
                 echo $event->idAuteur();
                 echo "</br>";
+                echo $event->votes();
+                echo "</br>";
                 echo $event->participant();
                 echo "</br>";
-                echo $event->descriptif();
+                $texte = $event->descriptif();
+                echo $texte;
+            
             }
             $request->closeCursor();
             echo'</section>';

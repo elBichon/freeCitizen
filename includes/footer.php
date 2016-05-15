@@ -1,4 +1,4 @@
-//footer inclus sur toutes les pages du site
+
 
 <section id="footer">
     <a href='codeOublie.php'>code oublié</a>

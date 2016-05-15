@@ -1,4 +1,3 @@
-//formulaire de recherche d infos
 
 <?php
     session_start();
@@ -25,7 +24,7 @@
         echo '<h1>Les dernières nouvelles</h1></br>';
         require 'includes/connect.php';
         
-        //appel aux variables necessaires
+
         $nomPage = "rechercheInfos.php";
         $ville = $_POST['ville'];
         $theme = $_POST['theme'];
@@ -34,24 +33,19 @@
         $recherche="rechercheInfos.php";
         $ajouter="ajoutInfos.php";
         
-         //insertion des plugins necessaires
         require 'includes/menu.php';
         require 'includes/menuServices.php';
         require 'includes/menuInfos.php';
         require 'includes/themesInfo.php';
         require 'objets/ObjetInfo.php';
         require 'includes/bbcodeTexte.php';
-        require 'objets/ObjetCommentaire.php';
         
-        echo '<section id="voirNouvelles"><h2>Toutes les nouvelles dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenInfos WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date DESC');
-        while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
-            
-            //appel au constructeur de l objet info
+        echo '<section id="voirInfos"><h2>Les dernières nouvelles dans cette ville</h2>';
+        $request = $bdd->query('SELECT * FROM freeCitizenInfos WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" ORDER BY date LIMIT 0, 10');
+        while ($donnees = $request->fetch(PDO::FETCH_ASSOC))
+        {
             $infos = new Info($donnees);
-            $texte = $infos->texte();
             
-            //azffichage de la bdd
             echo $infos->id();
             echo "</br>";
             echo $infos->titre();
@@ -64,47 +58,19 @@
             echo "</br>";
             echo $infos->idAuteur();
             echo "</br>";
+            echo $infos->votes();
+            echo "</br>";
+            $texte = $infos->texte();
             echo $texte;
-            
-            echo "</br>";
-            echo "</br>";
-            
-          echo '<section id="EnvoiCommentaire">';
-            echo '<form action="'.$nomPage.'" method="post">';
-            echo '<input type="text" name="texte" value="commenter" >';
-            echo '<input type="hidden" name="idCommentateur" value="<?php echo $idCommentateur
-          echo '<input type="hidden" name="idInfo" value="<?php echo $idInfo;
-            echo '</br>';
-            echo '<input type="submit" value="Envoyer" />';
-            echo '</form>';
-            echo'</section>';
-            
-            $req = $bdd->prepare('INSERT INTO freeCitizenCommentairesInfos (date, idArticle, idCommentateur, texte) VALUES(NOW(),?,?,?)');
-            $req->execute(array($_POST['idInfo'],$_POST['idCommentateur'],$_POST['texte']));
-            echo'</section>';
-            
-                echo '<section id="commentaire">';
-                $request1 = $bdd->query('SELECT * FROM freeCitizenCommentairesInfos WHERE idArticle = "'.$idInfo.'" ORDER BY datePost DESC LIMIT 0, 10');
-            while ($donneesCommentaire = $request1->fetch(PDO::FETCH_ASSOC)){
-                $commentaire = new Commentaire($donneesCommentaire);
-                echo $commentaire->idCommentateur();
-                echo "  ";
-                echo $commentaire->date();
-                echo " :";
-                echo "</br>";
-                echo $commentaire->texte();
-                echo "</br>";
-            }
-            $request1->closeCursor();
-                echo'</section>';
         }
+        $request->closeCursor();
         echo '</section>';
     }
     else {
         echo "vous n'etes pas connecté";
-    }
-    ?>
-    
+    }?>
+
+
 <?php
     echo '<footer>';
     require 'includes/footer.php';

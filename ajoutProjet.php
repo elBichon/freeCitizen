@@ -46,6 +46,7 @@ if ($_SESSION['id'] != 0) {
                 echo '<label for="equipe">equipe</label> :<textarea name="equipe" rows="10" cols="50" required>votre equipe ici</textarea><br />';
                 echo '<label for="descriptif">descriptif</label> :<textarea name="descriptif" rows="10" cols="50" required>votre projet ici</textarea><br />';
                echo '<input type="hidden" name="idAuteur" value=" echo $idAuteur;" >';
+            echo '<input type="hidden" name="vote" value=0 >';
                echo '<input type="submit" value="Envoyer" />';
             echo '</form>';
     
@@ -80,7 +81,7 @@ if ($_SESSION['id'] != 0) {
     }
     
     //verification que les champs ne sont pas vides
-    if (empty($ville) || empty($titre) || empty($ville) || empty($theme) || empty($equipe) || empty($descriptif)){
+    if (empty($ville) || empty($titre) || empty($theme) || empty($equipe) || empty($descriptif)){
         $vide_erreur = "Des champs sont vides";
         $i++;
         echo $vide_erreur;
@@ -90,7 +91,7 @@ if ($_SESSION['id'] != 0) {
     //sinon insertion dans la bdd
     else{
     $req = $bdd->prepare('INSERT INTO freeCitizenProjet (date, ville, theme, titre, idAuteur, equipe, descriptif) VALUES(NOW(),?,?,?,?,?,? )');
-    $req->execute(array($_POST['ville'], $_POST['theme'], $_POST['titre'],$_POST['idAuteur'],$_POST['equipe'],$_POST['descriptif']  ));
+    $req->execute(array($_POST['ville'], $_POST['theme'], $_POST['titre'],$_POST['idAuteur'],$_POST['equipe'],$_POST['descriptif'] ));
     }
 }
 else {

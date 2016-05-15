@@ -23,15 +23,13 @@
 
 <?php
     if ($_SESSION['id'] != 0) {
-        
         //appel aux plugins et variables
-        echo '<h1>Les dernières projets</h1></br>';
+        echo '<h1>Les derniers jobs</h1></br>';
         require 'includes/connect.php';
-        $nomPage = "rechercheProjet.php";
+        $nomPage = "job.php";
         $ville = $_POST['ville'];
-        $theme = $_POST['theme'];
+        $type = $_POST['type'];
         $statut = $_POST['statut'];
-        $idCommentateur=$_SESSION['id'];
         $mieuxNotes="job.php";
         $recherche="rechercheJob.php";
         $ajouter="ajoutJob.php";
@@ -40,20 +38,19 @@
         require 'includes/menuInfos.php';
         require 'includes/themesJob.php';
         require 'objets/ObjetJob.php';
-        
-        echo '<section id="voirProjet"><h2>Toutes les propostions et recherches d\'emplois dans cette ville</h2>';
-        $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND theme = "'.$theme.'" AND statut =  "'.$statut.'"ORDER BY date LIMIT 0, 10');
+        require 'includes/bbcodeTexte.php';
+
+        echo '<section id="voirJobs"><h2>Les meilleures propostions et recherches d\'emplois dans cette ville</h2>';
+        $request = $bdd->query('SELECT * FROM freeCitizenJob WHERE ville = "'.$ville.'" AND type = "'.$type.'" AND statut =  "'.$statut.'" ORDER BY votes LIMIT 0, 10');
         while ($donnees = $request->fetch(PDO::FETCH_ASSOC)){
-                $job = new Job($donnees);
+            
+            $job = new Job($donnees);
+            
                 echo $job->id();
                 echo "</br>";
                 echo $job->titre();
                 echo "</br>";
                 echo $job->date();
-                echo "</br>";
-                echo $job->dateTot();
-                echo "</br>";
-                echo $job->dateTard();
                 echo "</br>";
                 echo $job->ville();
                 echo "</br>";
@@ -61,11 +58,15 @@
                 echo "</br>";
                 echo $job->statut();
                 echo "</br>";
-                echo $job->descriptif();
+                echo $job->votes();
+                echo "</br>";
+                $texte = $job->descriptif();
+                echo $texte;
             }
-            $request->closeCursor();
-            echo'</section>';
-        }
+        $request->closeCursor();
+        
+        echo '</section>';
+    }
     else {
         echo "vous n'etes pas connecté";
     }

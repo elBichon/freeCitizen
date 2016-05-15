@@ -1,5 +1,3 @@
-//menu thématique
-//permet la navigation entre les grandes fonctionnalités du site
 
 <ul class="nav nav-tabs">
     <li role="infos" class="active"><a href="infos.php">INFOS</a></li>

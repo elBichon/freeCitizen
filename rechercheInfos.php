@@ -70,7 +70,6 @@
         echo "vous n'etes pas connecté";
     }?>
 
-
 <?php
     echo '<footer>';
     require 'includes/footer.php';

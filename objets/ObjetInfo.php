@@ -9,6 +9,7 @@
         $_ville,//ville ou l info a lieu
         $_theme,//theme de l article, ecologie, politique, finance...
         $_idAuteur,//jointure avec la table membre et appel a l objet compte
+        $_votes,
         $_texte;
         
         
@@ -59,6 +60,10 @@
         {
             return $this->_idAuteur;
         }
+        public function votes()
+        {
+            return $this->_votes;
+        }
         public function texte()
         {
             return $this->_texte;
@@ -99,13 +104,6 @@
                 $this->_theme = $theme;
             }
         }
-        public function setTexte($texte)
-        {
-            if (is_string($texte))
-            {
-                $this->_texte = $texte;
-            }
-        }
         public function setIdAuteur($idAuteur)
         {
             $idAuteur = (int) $idAuteur;
@@ -114,5 +112,16 @@
                 $this->_idAuteur = $idAuteur;
             }
         }
-    }
+        public function setVotes($votes)
+        {
+                $this->_votes = $votes;
+        }
+        public function setTexte($texte)
+        {
+            if (is_string($texte))
+            {
+                $this->_texte = $texte;
+            }
+        }
+}
     ?>

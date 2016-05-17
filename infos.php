@@ -73,11 +73,13 @@ if ($_SESSION['id'] != 0) {
                         //formulaire d'envois de commentaire
                         $idArticle = $infos->id();
                         $idAuteur = $_SESSION['id'];
+                        $tableCommentaire = "freeCitizenCommentairesInfos";
                             echo '<section id = "envoiCommentaires">';
                                 echo '<form action = commentaire.php method="post">';
                                     echo '<label for = "commentaire">Commentaire: </label>  <input type="text" name="commentaire" id="commentaire" required/></br>';
                                     echo '<input type = "hidden" name = "idAuteur" value = "'.$idAuteur.'" >';
                                     echo '<input type = "hidden" name = "idArticle" value = "'.$idArticle.'" >';
+                                    echo '<input type = "hidden" name = "tableCommentaire" value = "'.$tableCommentaire.'" >';
                                     echo '<input type="submit" value="Envoyer" />';
                                 echo '</form>';
                             echo '</section>';

@@ -125,11 +125,7 @@
         }
         public function setVotest($votes)
         {
-            $votes = (int) $votes;
-            if ($votes > 0)
-            {
                 $this->_votes = $votes;
-            }
         }
         public function setDescriptif($descriptif)
         {

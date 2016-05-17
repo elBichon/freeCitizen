@@ -4,9 +4,8 @@
         private $_id,
         $_idArticle,
         $_datePost,
-        $_idCommentateur,
-        $_texte;
-        
+        $_idAuteur,
+        $_commentaire;
         
         //construction
         public function __construct(array $donnees)
@@ -27,9 +26,7 @@
             }
         }
         
-        
         // GETTERS //
-        
         
         public function id()
         {
@@ -39,17 +36,17 @@
         {
             return $this->_idArticle;
         }
-        public function date()
+        public function datePost()
         {
-            return $this->_date;
+            return $this->_datePost;
         }
-        public function idCommentateur()
+        public function idAuteur()
         {
-            return $this->_idCommentateur;
+            return $this->_idAuteur;
         }
-        public function texte()
+        public function commentaire()
         {
-            return $this->_texte;
+            return $this->_commentaire;
         }
         
         //SETTERS
@@ -64,36 +61,22 @@
         }
         public function setIdArticle($idArticle)
         {
-            $idArticle = (int) $idArticle;
-            if ($idArticle > 0)
+            $this->_idArticle = $idArticle;
+        }
+        public function setDatePost($datePost)
+        {
+            $this->_datePost = $datePost;
+        }
+        public function setAuteur($idAuteur)
+        {
+            $this->_idAuteur = $idAuteur;
+        }
+        public function setCommentaire($commentaire)
+        {
+            if (is_string($commentaire))
             {
-                $this->_idArticle = $idArticle;
+                $this->_comentaire = $comentaire;
             }
-        }
-        public function setDate($date)
-        {
-            $this->_date = $date;
-        }
-        public function setCommentateur($idCommentateur)
-        {
-            $idCommentateur = (int) $idCommentateur;
-            if ($idCommentateur > 0)
-            {
-                $this->_idCommentateur = $idCommentateur;
-            }
-        }
-        public function setTexte($texte)
-        {
-            if (is_string($texte))
-            {
-                $this->_texte = $texte;
-            }
-        }
-        
-        //test objet
-        public function retour()
-        {
-            echo "test retour Projet";
         }
     }
 ?>

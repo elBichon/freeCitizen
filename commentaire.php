@@ -31,9 +31,11 @@
             $commentaire = htmlspecialchars($_POST['commentaire']);
             $idAuteur = htmlspecialchars($_POST['idAuteur']);
             $idArticle = htmlspecialchars($_POST['idArticle']);
+            $tableCommentaire = htmlspecialchars($_POST['tableCommentaire']);
             echo $commentaire;
         echo $idAuteur;
 echo $idArticle;
+        echo $tableCommentaire;
                 if (strlen($commentaire) < 3 || strlen($commentaire) > 300){
                         $titre_erreur2 = "Votre commentaire est soit trop grand, soit trop petit";
                         $i++;
@@ -47,7 +49,7 @@ echo $idArticle;
                         echo "</br>";
                     }
                 else{
-                    $reponse = $bdd->prepare('INSERT INTO freeCitizenCommentairesInfos (datePost,idArticle,idAuteur,commentaire) VALUES(NOW(),?,?,?)');
+                    $reponse = $bdd->prepare('INSERT INTO '.$tableCommentaire.' (datePost,idArticle,idAuteur,commentaire) VALUES(NOW(),?,?,?)');
                     $reponse->execute(array($_POST['idArticle'], $_POST['idAuteur'],$_POST['commentaire']));
                 }
         $reponse->closeCursor();

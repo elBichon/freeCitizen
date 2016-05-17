@@ -8,11 +8,10 @@ texte a inserer
 drop table if exists freeCitizenCommentairesInfos;
 create table freeCitizenCommentairesInfos (
 id integer not null primary key auto_increment,
-titre varchar(50) not null,
-idInfo integer not null,
-datePost datetime not null,
-idCommentateur integer  not null,
-texte text not null
+idArticle integer not null,
+date datetime not null,
+idAuteur integer  not null,
+commentaire text not null
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
 

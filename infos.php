@@ -31,6 +31,7 @@ if ($_SESSION['id'] != 0) {
             $ajouter = "ajoutInfos.php";
             $tableCommentaire = "freeCitizenCommentairesInfos";
             $tablePage = "freeCitizenInfos";
+    
             require 'includes/menu.php';
             require 'includes/menuServices.php';
             require 'includes/menuInfos.php';
@@ -83,6 +84,21 @@ if ($_SESSION['id'] != 0) {
                                     echo '<input type="submit" value="Envoyer" />';
                                 echo '</form>';
                             echo '</section>';
+                        echo '</section>';
+                        echo '</br>';
+                        //systeme pour voter pour un article
+                        $idArticle = $infos->id();
+                        $idAuteur = $_SESSION['id'];
+                        $votes = $infos->votes();
+                        $votesEnvoi = $votes + 1;
+                        $tablePage = "freeCitizenInfos";
+                        echo '<section id = "envoiVotes">';
+                                echo '<form action = commentaire.php method="post">';
+                                        echo '<input type = "hidden" name = "idArticle" value = "'.$idArticle.'" >';
+                                        echo '<input type = "hidden" name = "tablePage" value = "'.$tablePage.'" >';
+                                        echo '<input type = "hidden" name = "votesEnvoi" value = "'.$votesEnvoi.'" >';
+                                    echo '<input type="submit" value="voter" />';
+                                echo '</form>';
                         echo '</section>';
                         //système de commentaires
                         require 'objets/ObjetCommentaire.php';

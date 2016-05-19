@@ -34,17 +34,22 @@
             $tableCommentaire = htmlspecialchars($_POST['tableCommentaire']);
             $tablePage = htmlspecialchars($_POST['tablePage']);
             $votesEnvoi = htmlspecialchars($_POST['votesEnvoi']);
+            $idEvent = htmlspecialchars($_POST['idEvent']);
+            $participantEnvoi = htmlspecialchars($_POST['participantEnvoi']);
         
-            echo $idArticle;
-        echo "</br>";
-            echo $tablePage;
-         echo "</br>";
-            echo $votesEnvoi;
+       
         
-        $req=$bdd->prepare('UPDATE '.$tablePage.' SET votes = '.$votesEnvoi.'  WHERE id = '.$idArticle.'');
-            $req->bindParam(":votes",$_POST['votesEnvoi']);
-            $req->bindParam(":id",$_POST['idArticle']);
-        $req->execute();
+        //voter
+        $reqVotes=$bdd->prepare('UPDATE '.$tablePage.' SET votes = '.$votesEnvoi.'  WHERE id = '.$idArticle.'');
+            $reqVotes->bindParam(":votes",$_POST['votesEnvoi']);
+            $reqVotes->bindParam(":id",$_POST['idArticle']);
+        $reqVotes->execute();
+        
+        //participer
+        $reqParticiper=$bdd->prepare('UPDATE '.$tablePage.' SET participant = '.$participantEnvoi.'  WHERE id = '.$idEvent.'');
+            $reqParticiper->bindParam(":participant",$_POST['participantEnvoi']);
+            $reqParticiper->bindParam(":id",$_POST['idEvent']);
+        $reqParticiper->execute();
         
                 if (strlen($commentaire) < 3 || strlen($commentaire) > 300){
                         //$titre_erreur2 = "Votre commentaire est soit trop grand, soit trop petit";

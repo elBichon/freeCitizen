@@ -32,18 +32,28 @@
             $idAuteur = htmlspecialchars($_POST['idAuteur']);
             $idArticle = htmlspecialchars($_POST['idArticle']);
             $tableCommentaire = htmlspecialchars($_POST['tableCommentaire']);
-            echo $commentaire;
-        echo $idAuteur;
-echo $idArticle;
-        echo $tableCommentaire;
+            $tablePage = htmlspecialchars($_POST['tablePage']);
+            $votesEnvoi = htmlspecialchars($_POST['votesEnvoi']);
+        
+            echo $idArticle;
+        echo "</br>";
+            echo $tablePage;
+         echo "</br>";
+            echo $votesEnvoi;
+        
+        $req=$bdd->prepare('UPDATE '.$tablePage.' SET votes = '.$votesEnvoi.'  WHERE id = '.$idArticle.'');
+            $req->bindParam(":votes",$_POST['votesEnvoi']);
+            $req->bindParam(":id",$_POST['idArticle']);
+        $req->execute();
+        
                 if (strlen($commentaire) < 3 || strlen($commentaire) > 300){
-                        $titre_erreur2 = "Votre commentaire est soit trop grand, soit trop petit";
+                        //$titre_erreur2 = "Votre commentaire est soit trop grand, soit trop petit";
                         $i++;
                         echo $titre_erreur2;
                         echo "</br>";
                     }
                 if (empty($commentaire) || empty($idAuteur) || empty($idArticle)){
-                        $vide_erreur = "Des champs sont vides";
+                        //$vide_erreur = "Des champs sont vides";
                         $i++;
                         echo $vide_erreur;
                         echo "</br>";

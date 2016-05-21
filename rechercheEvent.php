@@ -67,6 +67,10 @@
                 echo "</br>";
                 $texte = $event->descriptif();
                 echo $texte;
+                echo "</br>";
+                echo "</br>";
+                //formulaire d'envois de commentaire
+                require 'includes/includesEvent.php';
             }
             $request->closeCursor();
             echo'</section>';

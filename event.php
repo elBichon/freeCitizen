@@ -67,21 +67,10 @@
                 echo "</br>";
                 $texte = $event->descriptif();
                 echo $texte;
-            
-            
-                        $idEvent = $event->id();
-                        $participant = $event->participant();
-                        $participantEnvoi = $participant + 1;
-                        $tablePage = "freeCitizenEvent";
-                        echo '<section id = "envoiVotes">';
-                                echo '<form action = commentaire.php method="post">';
-                                        echo '<input type = "hidden" name = "idEvent" value = "'.$idEvent.'" >';
-                                        echo '<input type = "hidden" name = "tablePage" value = "'.$tablePage.'" >';
-                                        echo '<input type = "hidden" name = "participantEnvoi" value = "'.$participantEnvoi.'" >';
-                                    echo '<input type="submit" value="participer" />';
-                                echo '</form>';
-                        echo '</section>';
-            
+                echo "</br>";
+                echo "</br>";
+                //formulaire d'envois de commentaire
+                require 'includes/includesEvent.php';
             }
             $request->closeCursor();
             echo'</section>';

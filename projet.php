@@ -61,6 +61,10 @@ if ($_SESSION['id'] != 0) {
         echo "</br>";
         $texte = $projet->descriptif();
         echo $texte;
+        echo "</br>";
+        echo "</br>";
+        //formulaire d'envois de commentaire
+        require 'includes/includesProjet.php';
     }
     $request->closeCursor();
     echo '</section>';

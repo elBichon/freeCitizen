@@ -62,6 +62,10 @@
             echo "</br>";
             $texte = $infos->texte();
             echo $texte;
+            echo "</br>";
+            echo "</br>";
+            //formulaire d'envois de commentaire
+            require 'includes/includesInfos.php';
         }
         $request->closeCursor();
         echo '</section>';

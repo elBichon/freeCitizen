@@ -62,6 +62,10 @@
                 echo "</br>";
                 $texte = $job->descriptif();
                 echo $texte;
+                echo "</br>";
+                echo "</br>";
+                //formulaire d'envois de commentaire
+                require 'includes/includesJob.php';
             }
             $request->closeCursor();
             echo'</section>';

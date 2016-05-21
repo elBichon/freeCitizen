@@ -65,6 +65,10 @@
             echo "</br>";
             $texte = $produit->descriptif();
             echo $texte;
+            echo "</br>";
+            echo "</br>";
+            //formulaire d'envois de commentaire
+            require 'includes/includesProduit.php';
             }
             $request->closeCursor();
             echo'</section>';

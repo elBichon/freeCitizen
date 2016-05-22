@@ -1,12 +1,5 @@
-/*creation de la table d'insertion des infos
-identiofiant numerique
-titre
-date de post
-texte a inserer
-*/
-
-drop table if exists freeCitizenCommentairesInfos;
-create table freeCitizenCommentairesInfos (
+drop table if exists freeCitizenCommentairesProjet;
+create table freeCitizenCommentairesProjet (
 id integer not null primary key auto_increment,
 idArticle integer not null,
 datePost datetime not null,

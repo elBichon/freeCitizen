@@ -6,8 +6,6 @@ create table freeCitizenJob (
 id integer not null primary key auto_increment,
 titre varchar(50) not null,
 date datetime not null,
-dateTot datetime not null,
-dateTard datetime not null,
 ville varchar(50) not null,
 type varchar(50) not null,
 statut varchar(50) not null,

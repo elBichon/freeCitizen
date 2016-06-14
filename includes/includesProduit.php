@@ -1,3 +1,4 @@
+<?php
 $idArticle = $produit->id();
                         $idAuteur = $_SESSION['id'];
                         $tableCommentaire = "freeCitizenCommentairesProduit";
@@ -46,4 +47,6 @@ $idArticle = $produit->id();
                             echo " :";
                             $texte = $commentaire->commentaire();
                             echo $texte;
-                        echo '</section>';
+                            echo '</section>';}
+    $request1->closeCursor();
+?>

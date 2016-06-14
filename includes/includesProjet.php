@@ -1,4 +1,5 @@
-  $idArticle = $projet->id();
+<?php
+$idArticle = $projet->id();
                         $idAuteur = $_SESSION['id'];
                         $tableCommentaire = "freeCitizenCommentairesProjet";
                             echo '<section id = "envoiCommentaires">';
@@ -46,4 +47,6 @@
                             echo " :";
                             $texte = $commentaire->commentaire();
                             echo $texte;
-                        echo '</section>';
+                            echo '</section>';}
+    $request1->closeCursor();
+?>

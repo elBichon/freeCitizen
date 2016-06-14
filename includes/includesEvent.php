@@ -1,3 +1,4 @@
+<?php
 $idArticle = $event->id();
                         $idAuteur = $_SESSION['id'];
                         $tableCommentaire = "freeCitizenCommentairesEvent";
@@ -59,4 +60,6 @@ $idArticle = $event->id();
                                         echo '<input type = "hidden" name = "participantEnvoi" value = "'.$participantEnvoi.'" >';
                                     echo '<input type="submit" value="participer" />';
                                 echo '</form>';
-                        echo '</section>';
+                            echo '</section>';}
+$request1->closeCursor();
+?>

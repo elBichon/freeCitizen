@@ -75,8 +75,6 @@ if ($_SESSION['id'] != 0) {
                         //formulaire d'envois de commentaire
                        require 'includes/includesInfos.php';
                         }
-                        $request1->closeCursor();
-                    }
     $request->closeCursor();
 }
 else {

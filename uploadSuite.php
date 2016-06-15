@@ -11,7 +11,8 @@
             //verification des noms et extension
             $infosfichier = pathinfo($_FILES['monfichier']['name']);
             $extension_upload = $infosfichier['extension'];
-            $extensions_autorisees = array('jpg', 'jpeg', 'png');
+            $extensions_autorisees = array('png');
+            
             if (in_array($extension_upload, $extensions_autorisees))
             {
                 //si le fichier est accepte insertion autorisee

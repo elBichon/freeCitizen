@@ -73,10 +73,7 @@
         }
         public function setCommentaire($commentaire)
         {
-            if (is_string($commentaire))
-            {
-                $this->_comentaire = $comentaire;
-            }
+                $this->_commentaire = $commentaire;
         }
     }
 ?>

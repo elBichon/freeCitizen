@@ -1,7 +1,6 @@
 <?php
-                $idArticle = $infos->id();
+                        $idArticle = $infos->id();
                         $idAuteur = $_SESSION['id'];
-                        $tableCommentaire = "freeCitizenCommentairesInfos";
                             echo '<section id = "envoiCommentaires">';
                                 echo '<form action = commentaire.php method="post">';
                                     echo '<label for = "commentaire">Commentaire: </label>  <input type="text" name="commentaire" id="commentaire" required/></br>';
@@ -14,11 +13,8 @@
                         echo '</section>';
                         echo '</br>';
                         //systeme pour voter pour un article
-                        $idArticle = $infos->id();
-                        $idAuteur = $_SESSION['id'];
                         $votes = $infos->votes();
                         $votesEnvoi = $votes + 1;
-                        $tablePage = "freeCitizenInfos";
                         echo '<section id = "envoiVotes">';
                                 echo '<form action = commentaire.php method="post">';
                                         echo '<input type = "hidden" name = "idArticle" value = "'.$idArticle.'" >';
@@ -33,20 +29,20 @@
                         echo "</br>";
                            echo 'vos réactions';
                         //formulaire d ajout des commentaires
-                            $idArticle = $infos->id();
-                            $idAuteur = $_SESSION['id'];
+    
                         echo "</br>";
                         echo "</br>";
                         //appel des commentaires
-                        $request1 = $bdd->query('SELECT * FROM '.$tableCommentaire.' c, '.$tablePage.' i WHERE c.idArticle = i.id ORDER BY datePost DESC LIMIT 0, 10');
+                        $request1 = $bdd->query('SELECT datePost, commentaire FROM '.$tableCommentaire.' c, '.$tablePage.' i WHERE i.id = c.idArticle ORDER BY datePost DESC LIMIT 0, 10');
                         while ($donneesCommentaires = $request1->fetch(PDO::FETCH_ASSOC)){
                         //affichage des commentaires
-                        $commentaire = new Commentaire($donneesCommentaires);
+                        $com = new Commentaire($donneesCommentaires);
                         echo '<section id="afficherCommentaire">';
-                            echo $commentaire->datePost();
+                            echo $com->datePost();
                             echo " :";
-                            $texte = $commentaire->commentaire();
+                            $texte = $com->commentaire();
                             echo $texte;
-                            echo '</section>';}
-                            $request1->closeCursor();
+                            echo '</section>';
+                        }
+                        $request1->closeCursor();
 ?>

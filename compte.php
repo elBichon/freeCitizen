@@ -40,9 +40,6 @@
                 $compte = new Compte($donnees);
                 $profil = $compte->login();
                 $img = "uploads/" .$profil. ".png";
-                echo"<strong>";
-                echo $img;
-                echo "</strong>";
                 echo '<img id="logo" src="'.$img.'">';
                 //affichage des infos de la bdd
                 echo "id: ";
